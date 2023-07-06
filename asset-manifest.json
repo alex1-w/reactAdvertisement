@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/reactAdvertisements/static/css/main.ab56d3b2.css",
+    "main.js": "/reactAdvertisements/static/js/main.10262357.js",
+    "index.html": "/reactAdvertisements/index.html",
+    "main.ab56d3b2.css.map": "/reactAdvertisements/static/css/main.ab56d3b2.css.map",
+    "main.10262357.js.map": "/reactAdvertisements/static/js/main.10262357.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ab56d3b2.css",
+    "static/js/main.10262357.js"
+  ]
+}

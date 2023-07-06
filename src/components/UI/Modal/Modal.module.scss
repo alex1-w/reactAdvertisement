@@ -1,0 +1,65 @@
+.overlay {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.315);
+    top: 0;
+    left: 0;
+    // border: 1px solid red;
+}
+
+
+.modal {
+    // border: 1px solid red;
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: auto;
+    max-width: fit-content;
+    margin: 0 auto;
+    height: calc(100% - 200px);
+    min-width: 60%;
+    // flex-direction: column;
+
+    // flex-direction: column;
+    &__header {
+        display: flex;
+    }
+}
+
+.modalContent {
+    // border: 1px solid red;
+    position: relative;
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 40px rgba(0, 0, 16, 0.574);
+
+    &__cancelIcon {
+        position: absolute;
+        // border: 1px solid red;
+        top: 3%;
+        right: 3%;
+        // width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        transition: scale 0.3s;
+        
+        &:hover {
+            svg {
+                transition: scale 0.3s;
+                scale: 1.2;
+            }
+        }
+    }
+}
+
+.cancelIcon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}

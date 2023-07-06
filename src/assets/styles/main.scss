@@ -1,0 +1,48 @@
+@import "reset";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ysabeau+SC:wght@1;100;200;30');
+
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap');
+
+body {
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    background-color: rgba(128, 128, 128, 0.192);
+
+    @media screen and (max-width: 900px) {
+        &::-webkit-scrollbar {
+            width: 0 !important
+        }
+    }
+
+
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+        border: 1.4px solid rgba(0, 0, 0, 0.384);
+        border-radius: inherit;
+        background-color: rgb(254, 254, 254);
+    }
+
+    ::-webkit-scrollbar-thumb {
+        // background-color: rgba(0, 0, 255, 0.374);
+        background-color: rgb(4, 211, 211);
+
+        border-radius: inherit;
+        box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    }
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    // font-family: 'Ysabeau SC', sans-serif;
+    font-family: 'Comfortaa', cursive;
+    color: rgb(57, 53, 53);
+}

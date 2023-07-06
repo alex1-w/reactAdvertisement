@@ -1,0 +1,75 @@
+.logoBlock {
+    // height: fit-content;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+
+    &__text {
+
+        h2 {
+            font-size: 29px;
+            color: black;
+            font-weight: bolder;
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    padding: 4px;
+    --border-size: 3px;
+    --border-angle: 0turn;
+    // width: 60vmin;
+    // height: 50vmin;
+    background-image: conic-gradient(from var(--border-angle),
+        rgba(34, 17, 51, 0),
+        rgba(17, 17, 34, 0.425) 50%,
+        rgba(34, 17, 51, 0.176)),
+    conic-gradient(from var(--border-angle), transparent 20%, rgba(0, 136, 255, 0.619), rgba(255, 0, 51, 0.6));
+    background-size: calc(100% - (var(--border-size) * 2)) calc(100% - (var(--border-size) * 2)),
+    cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    animation: bg-spin 3s linear infinite;
+
+    @keyframes bg-spin {
+        to {
+            --border-angle: 1turn;
+        }
+    }
+
+    &:hover {
+        animation-play-state: paused;
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////
+}
+
+@property --border-angle {
+    syntax: "<angle>";
+    inherits: true;
+    initial-value: 0turn;
+}
+
+@media screen and (max-width: 1150px) {
+    .logoBlock {
+        width: fit-content;
+
+        &__text {
+            display: none;
+        }
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .logoBlock {
+        width: fit-content;
+
+        svg {
+            height: 3em;
+        }
+
+
+        &__text {
+            display: none;
+        }
+    }
+}

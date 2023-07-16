@@ -1,3 +1,4 @@
+//@ts-ignore
 import styles from './Input.module.scss'
 import { UseFormRegister } from 'react-hook-form'
 import { DetailedHTMLProps, FC, InputHTMLAttributes } from "react"

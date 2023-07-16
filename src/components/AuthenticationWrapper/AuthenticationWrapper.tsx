@@ -1,3 +1,4 @@
+//@ts-ignore
 import styles from './AuthenticationWrapper.module.scss'
 import { LogIn } from '../LogIn/LogIn'
 import { SignIn } from '../SignIn/SignIn'

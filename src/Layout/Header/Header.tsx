@@ -1,13 +1,12 @@
+//@ts-ignore
 import styles from './Header.module.scss'
-import { Link, NavLink } from 'react-router-dom'
 import { useModalContext } from '../../components/UI/ModalProvider/ModalProvider'
-import { motion } from 'framer-motion'
 import { AuthenticationWrapper } from '../../components/AuthenticationWrapper/AuthenticationWrapper'
 import { Logo } from '../../components/Logo/Logo'
 import { InputSearch } from '../../components/UI/InputSearch/InputSearch'
 import { Navigation } from '../../components/Navigation/Navigation'
-import { Input } from '@mui/material'
 import { BurgerMenu } from '../../components/UI/BurgerMenu/BurgerMenu'
+import { ThemeButton } from '../../components/UI/ThemeButton/ThemeButton'
 
 const exitIcon =
     <svg xmlns="http://www.w3.org/2000/svg" height="2.4em" viewBox="0 0 512 512">
@@ -22,15 +21,14 @@ export const Header = () => {
     return (
         <header className={styles.header}>
             <div className={styles.wrapper}>
-
                 <Logo />
 
-                <InputSearch />
+                <InputSearch inputVariant='headerVariant' />
 
-                <Navigation  variant='headerVariant'/>
+                <Navigation variant='headerVariant' />
 
                 <div className={styles.userInteractBlock}>
-                    <div
+                    <button
                         className={styles.userInteractBlock__enterBlock}
                         onClick={() => { handleModal(<AuthenticationWrapper />) }}
                     >
@@ -40,9 +38,9 @@ export const Header = () => {
                         <div>
                             {userIcon}
                         </div>
-                    </div>
+                    </button>
 
-                  <div className={styles.userInteractBlock__burgerMenu}>  <BurgerMenu /></div>
+                    <div className={styles.userInteractBlock__burgerMenu}>  <BurgerMenu /></div>
                 </div>
 
             </div>

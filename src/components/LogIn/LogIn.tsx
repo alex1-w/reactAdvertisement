@@ -1,3 +1,4 @@
+//@ts-ignore
 import styles from './LogIn.module.scss'
 import { ChangeEvent, useState } from "react"
 import { http } from "../../http/http"

@@ -1,3 +1,4 @@
+//@ts-ignore
 import styles from './Categories.module.scss'
 import { useQuery } from 'react-query'
 import { categoryService } from '../../services/categoryService'

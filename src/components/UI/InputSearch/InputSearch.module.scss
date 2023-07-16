@@ -1,4 +1,4 @@
-.form {
+.headerVariant {
     margin-left: 10px;
     box-sizing: border-box;
     display: flex;
@@ -14,57 +14,33 @@
     border-radius: 42px;
     border: 2px solid #324b4e;
     background: #2affdc51;
-}
 
-.input {
-    outline: none;
-    position: relative;
-    transition: .3s linear;
-}
+    @media screen and (max-width: 700px) {
 
-
-@media screen and (max-width: 700px) {
-    .form {
         width: fit-content;
+
+        .input {
+            width: 130px;
+        }
     }
 
-    .input {
-        width: 130px;
-
+    @media screen and (max-width: 540px) {
+        display: none;
     }
-
 }
 
-// @media screen and (max-width: 700px) {
-//     .form {
-//         margin-left: 10px;
-//         box-sizing: border-box;
-//         display: flex;
-//         align-items: center;
-//         justify-content: space-between;
-//         padding: 10px;
-//         width: ;
-//         float: right;
-//         margin-right: 30px;
-//         // width: 250px;
-//         width: 100px;
+.burgerMenuVariant {
 
-//         &:focus {
-//             width: 200px;
-//         }
+    // border: 1px solid red;
+    button {
+        display: none;
+    }
 
-//         height: 42px;
-//         padding-left: 15px;
-//         border-radius: 42px;
-//         border: 2px solid #324b4e;
-//         background: #2affdc51;
-//     }
-
-//     .input {
-//         outline: none;
-//         position: relative;
-//         transition: .3s linear;
-//         // width: 100px;
-//     }
-
-// }
+    input {
+        border: 1px solid black;
+        height: 33px;
+        background-color: white;
+        border-radius: 5px;
+        box-shadow: 4px 4px 8px rgba(240, 235, 235, 0.2);
+    }
+}

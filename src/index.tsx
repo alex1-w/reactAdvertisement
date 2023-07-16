@@ -6,6 +6,7 @@ import { QueryClientProvider, QueryClient } from 'react-query';
 import { BrowserRouter } from 'react-router-dom'
 import { ModalProvider } from './components/UI/ModalProvider/ModalProvider';
 import { SnackbarProvider, useSnackbar } from 'notistack';
+import { ThemeProvider } from './providers/ThemeContext';
 
 
 const queryClient = new QueryClient({
@@ -25,9 +26,11 @@ root.render(
 
       <SnackbarProvider>
 
-        <ModalProvider>
-          <App />
-        </ModalProvider>
+        <ThemeProvider>
+          <ModalProvider>
+            <App />
+          </ModalProvider>
+        </ThemeProvider>
 
       </SnackbarProvider>
 

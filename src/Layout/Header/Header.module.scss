@@ -2,7 +2,7 @@
     position: relative;
     padding: 10px 20px;
     box-shadow: 0px -5px 10px 0px rgba(0, 0, 0, 0.5);
-    background-color: white;
+    // background-color: white;
 }
 
 .wrapper {
@@ -54,8 +54,6 @@
 
     .wrapper {
         display: grid;
-        // grid-template-columns: 1fr auto 20%;
-        // grid-template-columns: auto 1fr auto auto;
         grid-template-columns: auto 1fr auto;
     }
 
@@ -65,6 +63,28 @@
             justify-self: flex-end;
             width: fit-content;
             display: flex;
+        }
+    }
+}
+
+@media screen and (max-width: 540px) {
+
+    .wrapper {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .userInteractBlock {
+        justify-self: flex-end;
+
+        &__enterBlock {
+
+            svg {
+                height: 1.4em;
+            }
+
+            p {
+                font-size: 13px;
+            }
         }
     }
 }

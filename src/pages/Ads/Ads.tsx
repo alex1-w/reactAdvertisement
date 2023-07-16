@@ -1,3 +1,4 @@
+//@ts-ignore
 import styles from './Ads.module.scss'
 import { AdvertisementItem } from "../../components/AdvertisementItem/AdvertisementItem"
 import { CategoriesItem } from "../../components/CategoriesItem/CategoriesItem"
@@ -9,7 +10,6 @@ export const Ads = () => {
     return (
         <>
             <Container>
-
                 <section className={styles.categoryBlock}>
                     <div className={styles.categoryBlock__wrapper}>
 
@@ -23,7 +23,6 @@ export const Ads = () => {
 
                     </div>
                 </section>
-
 
                 <section className={styles.main}>
 

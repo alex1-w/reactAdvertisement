@@ -1,3 +1,4 @@
+//@ts-ignore
 import styles from './Modal.module.scss'
 import { AnimatePresence, motion } from "framer-motion"
 import { createPortal } from "react-dom"

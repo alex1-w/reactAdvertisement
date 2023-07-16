@@ -1,3 +1,4 @@
+//@ts-ignore
 import styles from './Advertisement.module.scss'
 import { useParams } from "react-router-dom"
 import { Container } from "../../components/Container/Container"
@@ -9,7 +10,7 @@ import { advertisements } from '../../data/advertisement.data'
 export const Advertisement = () => {
     const { id } = useParams()
     const advertisement = advertisements.find(ad => Number(ad.id) === Number(id))
-    const advertisementNumber = advertisement?.name
+    const advertisementNumber = advertisement?.phoneNumber
 
     const [numberButtonVariant, setNumberButtonVariant] = useState<any>('УЗНАТЬ НОМЕР')
 
@@ -19,36 +20,24 @@ export const Advertisement = () => {
         <Container>
             <section className={styles.main}>
 
-                <aside className={styles.asideBlock}>
 
-                    <h2>433542 руб.</h2>
+                <div className={styles.leftPart}>
+                    <div className={styles.leftPart__headBlock}>
 
-                    <div className={styles.asideBlock__description}>
+                        <div className={styles.leftPart__titleBlock}>
 
-                        <div className={styles.asideBlock__btns}>
-                            <Button type='button' variant='contained' color='info' > написать сообщение</Button>
-                            <Button type='button' variant='contained' color='secondary' onClick={showNumber}>{numberButtonVariant}</Button>
+                            <div className={styles.leftPart__title}>
+                                <h1>{advertisement?.name}</h1>
+                            </div>
+
+                            <div className={styles.leftPart__price}>
+                                <h4>433542&nbsp;руб.</h4>
+                            </div>
+
                         </div>
 
-                        <div className={styles.asideBlock__aboutAdvertisement}>
-                            <h3>Cостояние:</h3>
-                            <h3>Категория:</h3>
-                        </div>
+                        <div className={styles.leftPart__buttons}>
 
-                        <div className={styles.asideBlock__mainText}>
-                            <h1>Описание:</h1>
-                            <p>{advertisement?.description}</p>
-                        </div>
-
-                    </div>
-                </aside>
-
-                <div className={styles.advertisementBlock}>
-
-                    <div className={styles.advertisementBlock__head}>
-                        <h1>{advertisement?.name}</h1>
-                        
-                        <div className={styles.advertisementBlock__btns}>
                             <Button
                                 variant='outlined'
                                 className={styles.likeBtn}
@@ -61,11 +50,43 @@ export const Advertisement = () => {
                         </div>
                     </div>
 
-                    <div className={styles.advertisementBlock__imbBlock}>
+                    <div className={styles.leftPart__imageBlock}>
                         <img src={advertisement?.image} alt="" />
                     </div>
-
                 </div>
+
+
+                <aside className={styles.rightPart}>
+
+                    <div className={styles.rightPart__about}>
+                        <h5>Cостояние:</h5>
+                        <h5>Категория:</h5>
+                    </div>
+
+                    <div className={styles.rightPart__description}>
+                        <h5>Описание:</h5>
+                        <p>{advertisement?.description}</p>
+                    </div>
+
+                    <div className={styles.rightPart__buttons}>
+                        <Button
+                            type='button'
+                            variant='contained'
+                            color='info'
+                        >
+                            написать сообщение
+                        </Button>
+                        <Button
+                            type='button'
+                            variant='contained'
+                            color='secondary'
+                            onClick={showNumber}
+                        >
+                            {numberButtonVariant}
+                        </Button>
+                    </div>
+
+                </aside>
 
             </section>
         </Container>

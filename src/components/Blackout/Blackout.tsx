@@ -1,3 +1,4 @@
+//@ts-ignore
 import styles from './Blackout.module.scss'
 import { AnimatePresence, motion } from "framer-motion"
 

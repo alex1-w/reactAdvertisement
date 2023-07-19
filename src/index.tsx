@@ -8,7 +8,6 @@ import { ModalProvider } from './components/UI/ModalProvider/ModalProvider';
 import { SnackbarProvider, useSnackbar } from 'notistack';
 import { ThemeProvider } from './providers/ThemeContext';
 
-
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {

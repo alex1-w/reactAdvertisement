@@ -7,7 +7,7 @@ import { Container } from '../../components/Container/Container'
 import { categories } from '../../data/categories.data'
 
 export const Categories = () => {
-    const { data, error, isLoading } = useQuery(['getCategories'], () => categoryService.getCategories())
+    // const { data, error, isLoading } = useQuery(['getCategories'], () => categoryService.getCategories())
     // console.log(error, data, isLoading);
 
     return (

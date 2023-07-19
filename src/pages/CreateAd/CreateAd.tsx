@@ -69,7 +69,7 @@ export const CreateAd = () => {
           <div className={styles.categoryBlock}>
             {/* <InputLabel id="category"> Категория</InputLabel> */}
 
-            <Select
+            {/* <Select
               name="category"
               size="small"
               label="выбор категории"
@@ -79,7 +79,7 @@ export const CreateAd = () => {
               {categoriesNames.map((category, index) => (
                 <MenuItem value={index}>{category}</MenuItem>
               ))}
-            </Select>
+            </Select> */}
             <p>{errors.category?.message}</p>
           </div>
 

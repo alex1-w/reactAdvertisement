@@ -1,29 +1,24 @@
 //@ts-ignore
 import styles from "./SignIn.module.scss";
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 import { http } from "../../http/http";
-import cn from "classnames";
 import { useForm } from "react-hook-form";
 import { Button } from "@mui/material";
-import { Input } from "../UI/Input/Input";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { userService } from "../../services/useService/userService";
-import { IUserService } from "../../services/useService/IUserService";
+import { userService } from "../../services/userService/userService";
+import { IUserService } from "../../services/userService/IUserService";
 import { enqueueSnackbar } from "notistack";
 import { AxiosError } from "axios";
-
-export interface IFormState {
-  login: string;
-  password: string;
-  repeatPassword: string;
-}
+import { InputBlock } from "../UI/InputBlock/InputBlock";
+import { fieldNameCheck } from "../../helpers/validateHelpers";
+import { ISignForm } from "../../types/ISignForm";
 
 export const SignIn = () => {
   const {
     register,
     handleSubmit,
     setError,
-    formState: { errors, isDirty, dirtyFields, isValid, submitCount },
+    formState: { errors, isValid, submitCount },
   } = useForm({
     mode: "onBlur",
     reValidateMode: "onChange",
@@ -34,16 +29,19 @@ export const SignIn = () => {
     },
   });
 
-  const queryClient = useQueryClient();
-  console.log(queryClient.getQueryData(["signIn"]));
+  const [loading, setLoading] = useState(true);
+  function handleClick() {
+    setLoading(true);
+  }
+  // const queryClient = useQueryClient();
+  // console.log(queryClient.getQueryData(["signIn"]));
 
-  const { isLoading, mutateAsync } = useMutation(
+  const { isLoading, mutateAsync, isSuccess } = useMutation(
     ["signIn"],
     (body: IUserService) => userService.registration(body),
     {
       onSuccess: (data) => {
         enqueueSnackbar("вы успешно запегистрированы", { variant: "error" });
-        
         console.log(data);
       },
       onError: (error: AxiosError<{ message: string }>) => {
@@ -52,9 +50,11 @@ export const SignIn = () => {
       },
     }
   );
+  console.log(errors);
 
-  const onSubmit = async (formData: IFormState) => {
+  const onSubmit = async (formData: ISignForm) => {
     console.log(formData);
+
     if (submitCount === 0 && formData.password.length < 6)
       return setError("password", {
         message: "пароль должен быть больше 5 сивмолов",
@@ -64,57 +64,91 @@ export const SignIn = () => {
     }
     const body = { login: formData.login, password: formData.password };
     mutateAsync(body);
+    if (isSuccess) return console.log('вход разрешен');
+    return console.log('нет');
   };
 
   return (
-    <div className={styles.inputsBlock}>
-      <form onSubmit={handleSubmit(onSubmit)} className={styles.inputsBlock}>
-        <div className={styles.inputItem}>
-          <Input
-            inputType="login"
-            minLength={5}
-            name="login"
-            placeholder="login"
-            register={register}
-            type="text"
-          />
-          <p>{errors.login?.message}</p>
-        </div>
+    <form onSubmit={handleSubmit(onSubmit)} className={styles.formBlock}>
+      <div className={styles.inputsWrapper}>
 
-        <div className={styles.inputItem}>
-          <Input
-            inputType="password"
-            minLength={5}
-            name="password"
-            placeholder="password"
-            register={register}
-            type="password"
-          />
-          <p>{errors.password?.message}</p>
-        </div>
+        <InputBlock
+          placeholder="login"
+          errors={errors}
+          name="login"
+          register={register}
+          rules={{
+            validate: fieldNameCheck,
+            minLength: { value: 2, message: 'количество символов меньше 2х' },
+            required: {
+              value: true,
+              message: 'поле не заполнено'
+            }
+          }}
+          size="medium"
+          type="text"
+        />
 
-        <div className={styles.inputItem}>
-          <Input
-            inputType="repeatpassword"
-            minLength={5}
-            name="repeatPassword"
-            placeholder="repeat password"
-            register={register}
-            type="password"
-          />
-          <p>{errors.repeatPassword?.message}</p>
-        </div>
+        <InputBlock
+          placeholder="password"
+          errors={errors}
+          name="password"
+          register={register}
+          rules={{
+            validate: fieldNameCheck,
+            minLength: {
+              value: 2,
+              message: 'количество символов меньше 2х'
+            },
+            required: {
+              value: true,
+              message: 'поле не заполнено'
+            }
+          }}
+          size="medium"
+          type="password"
+        />
 
-        <Button
-          type="submit"
-          disabled={!isValid}
-          color="success"
+        <InputBlock
+          placeholder="repeat password"
+          errors={errors}
+          name="repeatPassword"
+          register={register}
+          rules={{
+            validate: fieldNameCheck,
+            minLength: {
+              value: 2,
+              message: 'количество символов меньше 2х'
+            },
+            required: {
+              value: true,
+              message: 'поле не заполнено'
+            }
+          }}
+          size="medium"
+          type="password"
+        />
+
+      </div>
+      {/* {!isLoading ? ''
+          :
+          <LoadingButton
           size="large"
-          variant="contained"
-        >
-          registration
-        </Button>
-      </form>
-    </div>
+          onClick={handleClick}
+          loading={loading}
+          variant="outlined"
+          disabled
+        />} */}
+
+      <Button
+        type="submit"
+        disabled={submitCount !== 0 && !isValid}
+        color="success"
+        size="large"
+        variant="contained"
+      >
+        registration
+      </Button>
+    </form >
   );
 };

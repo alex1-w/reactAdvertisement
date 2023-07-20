@@ -1,6 +1,6 @@
-import { FC } from 'react'
 //@ts-ignore
 import styles from './AdvertisementItem.module.scss'
+import { FC } from 'react'
 import { Link } from 'react-router-dom'
 import { Button } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';

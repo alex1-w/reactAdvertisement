@@ -8,7 +8,7 @@ export const AuthenticationWrapper = () => {
     const [pageVariant, setPageVariant] = useState<'login' | 'signin'>('login')
 
     return (
-        <>
+        <div className={styles.main}>
             <div className={styles.pageVariantBlock}>
                 <p onClick={() => setPageVariant('login')}>login</p>
                 <p onClick={() => setPageVariant('signin')}>sign in</p>
@@ -17,6 +17,6 @@ export const AuthenticationWrapper = () => {
             {pageVariant === 'login' && <LogIn />}
             {pageVariant === 'signin' && <SignIn />}
 
-        </>
+        </div>
     )
 }

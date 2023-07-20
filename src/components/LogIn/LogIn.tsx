@@ -9,6 +9,8 @@ import { ILoginForm } from '../../types/ILoginForm'
 import { Input } from '../UI/Input/Input'
 import { Button } from '@mui/material'
 import { AnimatePresence, motion } from 'framer-motion'
+import { InputBlock } from '../UI/InputBlock/InputBlock'
+import { fieldNameCheck } from '../../helpers/validateHelpers'
 
 export const LogIn = () => {
 
@@ -26,38 +28,63 @@ export const LogIn = () => {
 
     const onSubmit: SubmitHandler<ILoginForm> = async (data) => {
         console.log(data);
-
-        // try {
-        // const { data } = await http.post('/user/authentication', {})
-        // console.log(data);
-        // } catch (err) {
-        // return enqueueSnackbar('ошибка сервера', { variant: 'error' })
-        // }
     }
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className={styles.inputsBlock}>
 
-            <div className={styles.inputItem}>
-                <Input inputType='login' minLength={5} name='login' placeholder='login' register={register} type='text' />
-                <p>{errors.login?.message}</p>
-            </div>
+            <div className={styles.inputsWrapper}>
 
-            <div className={styles.inputItem}>
-                <Input inputType='password' minLength={5} name='password' placeholder='password' register={register} type='password' />
-                <p>{errors.password?.message}</p>
-            </div>
+                <InputBlock
+                    placeholder="login"
+                    errors={errors}
+                    name="login"
+                    register={register}
+                    rules={{
+                        validate: fieldNameCheck,
+                        minLength: {
+                            value: 2, message:
+                                'количество символов меньше 2х'
+                        },
+                        required: {
+                            value: true,
+                            message: 'поле не заполнено'
+                        }
+                    }}
+                    size="medium"
+                    type="text"
+                />
 
-            <Button
-                className={styles.btnAuth}
-                type='submit'
-                disabled={!isValid}
-                color='success'
-                size='large'
-                variant='contained'
-            >
-                authentication
-            </Button>
+                <InputBlock
+                    placeholder="password"
+                    errors={errors}
+                    name="password"
+                    register={register}
+                    rules={{
+                        validate: fieldNameCheck,
+                        minLength: {
+                            value: 2,
+                            message: 'количество символов меньше 2х'
+                        },
+                        required: {
+                            value: true,
+                            message: 'поле не заполнено'
+                        }
+                    }}
+                    size="medium"
+                    type="password"
+                />
+                <Button
+                    className={styles.btnAuth}
+                    type='submit'
+                    disabled={!isValid}
+                    color='success'
+                    size='large'
+                    variant='contained'
+                >
+                    authentication
+                </Button>
+            </div>
 
         </form>
     )

@@ -42,13 +42,15 @@ body {
 
     border-radius: inherit;
     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    
   }
 }
 
 .layout {
   background-color: var(--bg-light);
-}
+  // background-color: var(--bg-dark);
 
+}
 .layout.dark {
   background-color: var(--bg-dark);
 

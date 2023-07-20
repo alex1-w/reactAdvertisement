@@ -1,11 +1,10 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import "./assets/styles/main.scss"
 import { QueryClientProvider, QueryClient } from 'react-query';
 import { BrowserRouter } from 'react-router-dom'
 import { ModalProvider } from './components/UI/ModalProvider/ModalProvider';
-import { SnackbarProvider, useSnackbar } from 'notistack';
+import { SnackbarProvider } from 'notistack';
 import { ThemeProvider } from './providers/ThemeContext';
 
 const queryClient = new QueryClient({

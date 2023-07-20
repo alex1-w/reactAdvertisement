@@ -9,7 +9,8 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route index path="/" element={<Ads />} />
+        {/* <Route index path="/" element={<Ads />} /> */}
+        <Route index element={<Ads />} />
         <Route path="/categories" element={<Categories />} />
         <Route path="/create-ad" element={<CreateAd />} />
         <Route path="/advertisement/:id" element={<Advertisement />} />

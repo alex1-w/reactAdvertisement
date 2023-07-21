@@ -9,9 +9,6 @@ interface IDrawerMenuProps {
 
 export const DrawerMenu: FC<IDrawerMenuProps> = ({ children }) => {
     return (
-
-
-
         <motion.div
             className={styles.main}
             initial={{ opacity: 0 }}

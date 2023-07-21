@@ -1,0 +1,33 @@
+.dropZone {
+    display: grid;
+    grid-template-columns: 20% 80%;
+
+    &__dropSection {
+        transition: 0.3s all;
+        width: 100px;
+        background-color: rgba(41, 41, 255, 0.167);
+        padding: 10px;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+        justify-content: center;
+
+        &:hover {
+            transition: 0.3s all;
+            box-shadow: inset 10px 10px 30px 2px rgba(34, 60, 80, 0.257);
+        }
+    }
+
+    &__fileSection {
+        cursor: auto;
+        background-color: rgba(41, 41, 255, 0.167);
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    section {
+        cursor: pointer;
+    }
+}

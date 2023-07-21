@@ -39,60 +39,84 @@ const technicIcon = (
   </svg>
 );
 
+export const fileIcon = <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 512 512"><path d="M251.7 127.6l0 0c10.5 10.5 24.7 16.4 39.6 16.4H448c8.8 0 16 7.2 16 16v32H48V96c0-8.8 7.2-16 16-16H197.5c4.2 0 8.3 1.7 11.3 4.7l33.9-33.9L208.8 84.7l42.9 42.9zM48 240H464V416c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V240zM285.7 93.7L242.7 50.7c-12-12-28.3-18.7-45.3-18.7H64C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V160c0-35.3-28.7-64-64-64H291.3c-2.1 0-4.2-.8-5.7-2.3z" /></svg>
+
 export interface ICategoryOption {
   value: string;
   link: string;
   image: React.ReactElement;
   color: string;
+  label: string
 }
 
 export const categories: ICategoryOption[] = [
   {
     value: "работа",
+    label: "работа",
     link: "/",
     image: jobIcon,
     color: "rgba(202, 0, 0, 0.349)",
   },
   {
     value: "услуги",
+    label: "услуги",
     link: "/",
     image: serviceIcon,
     color: " rgba(255, 204, 0, 0.346)",
   },
   {
     value: "авто",
+    label: "авто",
     link: "/",
     image: carIcon,
     color: "rgba(175, 202, 0, 0.349)",
   },
   {
     value: "недвижимость",
+    label: "недвижимость",
     link: "/",
     image: houseIcon,
     color: "rgba(0, 34, 202, 0.349)",
   },
   {
     value: "хобби",
+    label: "хобби",
     link: "/",
     image: hobbyIcon,
     color: "rgba(202, 0, 158, 0.349)",
   },
   {
     value: "товары для дома",
+    label: "товары для дома",
     link: "/",
     image: houseGoods,
     color: "rgba(0, 98, 202, 0.349)",
   },
   {
     value: "животные",
+    label: "животные",
     link: "/",
     image: petIcon,
     color: "rgba(0, 202, 7, 0.549)",
   },
   {
     value: "электротехника",
+    label: "электротехника",
     link: "/",
     image: technicIcon,
     color: "rgba(202, 0, 54, 0.549)",
   },
+];
+
+
+
+export const options = [
+  { value: 'электротехника', label: 'электротехника' },
+  { value: 'животные', label: 'животные' },
+  { value: 'товары для дома', label: 'товары для дома' },
+  { value: 'хобби', label: 'хобби' },
+  { value: 'недвижимость', label: 'недвижимость' },
+  { value: 'авто', label: 'авто' },
+  { value: 'услуги', label: 'услуги' },
+  { value: 'работа', label: 'работа' },
 ];

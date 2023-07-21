@@ -1,12 +1,12 @@
 .wrapper {
-  height: 90vh;
+  // height: 90vh;
   background-color: black;
-  // border: 1px solid red;
-  margin: 0 auto;
+  margin: 30px auto;
   display: flex;
   flex-direction: column;
   gap: 15px;
   max-width: 70vw;
+  width: 800px;
   padding: 40px 70px;
   background-color: rgba(41, 41, 255, 0.267);
   border-radius: 30px;
@@ -16,6 +16,7 @@
     width: 90%;
     border-bottom: 3px solid rgba(0, 0, 0, 0.37);
   }
+
   button {
     margin: 0 auto;
     width: 70%;
@@ -29,30 +30,73 @@
 }
 
 .categoryBlock {
+  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background-color: rgba(41, 41, 255, 0.167);
+  border-radius: 10px;
+  padding: 20px 10px;
+  z-index: 10;
+
+  p {
+    color: rgb(126, 0, 0);
+    font-weight: 500;
+    padding: 10px 0 0 5px;
+  }
+
+
+  &__selectBlock {
+    display: flex;
+    flex-direction: column;
+
+    select {
+      border-radius: 10px;
+      height: 60px;
+
+      option {
+        background-color: rgba(41, 41, 255, 0.267);
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+}
+
+.inputBlock {
+  align-items: center;
   display: grid;
   grid-template-columns: 1fr 1fr;
   background-color: rgba(41, 41, 255, 0.167);
   border-radius: 10px;
   padding: 20px 10px;
 
-  &__selectBlock {
+  input {
+    background-color: white;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .wrapper {
+    max-width: 90vw;
+    padding: 30px;
+  }
+
+}
+
+@media screen and (max-width: 520px) {
+
+  .categoryBlock {
     display: flex;
     flex-direction: column;
-    p {
-      color: rgb(126, 0, 0);
-      font-weight: 500;
-      padding: 10px 0 0 5px;
-    }
-    select {
-      border-radius: 10px;
-      height: 60px;
-      & option {
-        background-color: rgba(41, 41, 255, 0.267);
-width: 20px;
-height: 20px;
-        // background-color: red;
-        // padding: 10px;
+
+    &__selectBlock {
+
+      select {
+        width: 100%;
       }
     }
   }
+
+
+  .inputBlock {}
 }

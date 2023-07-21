@@ -5,7 +5,7 @@
     flex-direction: column;
     gap: 7px;
     cursor: pointer;
-    z-index: 15;
+    z-index: 41;
     position: relative;
 
     & span {
@@ -35,10 +35,11 @@
     background-color: white !important;
 }
 
-.inputItem{
+.inputItem {
+
     // background-color: rgb(94, 94, 94) !important;
     // box-sizing: border-box;
-    input{
+    input {
         color: wheat;
 
     }

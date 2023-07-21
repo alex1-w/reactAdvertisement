@@ -36,20 +36,21 @@ export const SignIn = () => {
   // const queryClient = useQueryClient();
   // console.log(queryClient.getQueryData(["signIn"]));
 
-  const { isLoading, mutateAsync, isSuccess } = useMutation(
-    ["signIn"],
-    (body: IUserService) => userService.registration(body),
-    {
-      onSuccess: (data) => {
-        enqueueSnackbar("вы успешно запегистрированы", { variant: "error" });
-        console.log(data);
-      },
-      onError: (error: AxiosError<{ message: string }>) => {
-        console.log(error);
-        enqueueSnackbar(error.response?.data?.message, { variant: "error" });
-      },
-    }
-  );
+  const { isLoading, mutateAsync, isSuccess } =
+    useMutation(
+      ["signIn"],
+      (body: IUserService) => userService.registration(body),
+      {
+        onSuccess: (data) => {
+          enqueueSnackbar("вы успешно запегистрированы", { variant: "error" });
+          console.log(data);
+        },
+        onError: (error: AxiosError<{ message: string }>) => {
+          console.log(error);
+          enqueueSnackbar(error.response?.data?.message, { variant: "error" });
+        },
+      }
+    );
   console.log(errors);
 
   const onSubmit = async (formData: ISignForm) => {
@@ -64,8 +65,8 @@ export const SignIn = () => {
     }
     const body = { login: formData.login, password: formData.password };
     mutateAsync(body);
-    if (isSuccess) return console.log('вход разрешен');
-    return console.log('нет');
+    // if (isSuccess) return console.log('вход разрешен');
+    // return console.log('нет');
   };
 
   return (

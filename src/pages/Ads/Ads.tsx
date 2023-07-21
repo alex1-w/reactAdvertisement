@@ -17,7 +17,7 @@ export const Ads = () => {
 
                         <div className={styles.categoryBlock__categoriesGrid}>
                             {categories.map(category => (
-                                <CategoriesItem category={category} key={category.name} />
+                                <CategoriesItem category={category} key={category.value} />
                             ))}
                         </div>
 

@@ -1,16 +1,20 @@
 //@ts-ignore
 import styles from "./CreateAd.module.scss";
 import { Button } from "@mui/material";
-import { useForm, SubmitHandler, Controller } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { Container } from "../../components/Container/Container";
-import { categories } from "../../data/categories.data";
+import { ICategoryOption, categories } from "../../data/categories.data";
 import { useMutation } from "react-query";
 import { advertisementService } from "../../services/advertisementService/advertisementService";
-import { InputBlock } from "../../components/UI/InputBlock/InputBlock";
 import { CategoryBlock } from "./CategoryBlock/CategoryBlock";
 import { AnimatePresence, motion } from "framer-motion";
+import ReactSelect from "react-select";
 
-const categoriesNames = categories.map((item) => item.name);
+// const categoriesNames = categories.map((item) => item.name);
+
+const getValue = (value: string) => {
+  return value ? categories.find((option) => option.value === value) : "";
+};
 
 export interface ICreateAdForm {
   category: string;
@@ -75,42 +79,38 @@ export const CreateAd = () => {
 
           <div className={styles.categoryBlock}>
             <h3>Категория</h3>
-            <div className={styles.categoryBlock__selectBlock}>
-              {categoriesNames.map((option) => (
-                <>
-                  <input
-                    id={option}
-                    type="checkbox"
-                    value={option}
-                    name={option}
-                  />
-                  <label htmlFor={option}>{option}</label>
-                </>
-              ))}
-              <AnimatePresence>
-                {errors.category && (
-                  <motion.p
-                    initial={{ opacity: 0, y: "-100", height: 0 }}
-                    animate={{ opacity: 1, y: 0, height: "auto" }}
-                    exit={{ height: 0, y: "-100", opacity: 0 }}
-                  >
-                    {errors.category?.message}
-                  </motion.p>
+            <div>
+              <Controller
+                control={control}
+                name="category"
+                render={({
+                  field: { name, value, onChange },
+                  fieldState: { error },
+                }) => (
+                  <div className={styles.main}>
+                    <ReactSelect
+                      onChange={(newValue) =>
+                        onChange((newValue as ICategoryOption).value)
+                      }
+                      value={getValue(value)}
+                      options={categories}
+                    />
+
+                    <AnimatePresence>
+                      {errors[name] && (
+                        <motion.p
+                          initial={{ opacity: 0, y: "-100", height: 0 }}
+                          animate={{ opacity: 1, y: 0, height: "auto" }}
+                          exit={{ height: 0, y: "-100", opacity: 0 }}
+                        >
+                          {errors[name]?.message}
+                        </motion.p>
+                      )}
+                    </AnimatePresence>
+                  </div>
                 )}
-              </AnimatePresence>
-              {/* <div className={styles.categoryBlock__selectBlock}>
-              <select
-                {...register("category", {
-                  required: { value: true, message: "поле обязательно" },
-                })}
-              >
-                {categoriesNames.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
-              <AnimatePresence>
+              />
+              {/* <AnimatePresence>
                 {errors.category && (
                   <motion.p
                     initial={{ opacity: 0, y: "-100", height: 0 }}
@@ -130,11 +130,10 @@ export const CreateAd = () => {
             register={register}
             rules={{ minLength: { value: 2, message: "min - 2" } }}
             size="medium"
-            heading="Название"
+            heading="Описание"
             type="text"
             label="title"
             placeholder="title"
-            // isMulti={{ multiline: true, rows: 4 }}
             isMulti={4}
           />
         </div>

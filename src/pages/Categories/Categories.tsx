@@ -17,7 +17,7 @@ export const Categories = () => {
 
                 <div className={styles.wrapper}>
                     {categories.map(item => (
-                        <CategoriesItem category={item} key={item.name} />
+                        <CategoriesItem category={item} key={item.value} />
                     ))}
                 </div>
 

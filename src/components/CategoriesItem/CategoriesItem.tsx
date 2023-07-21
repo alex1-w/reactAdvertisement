@@ -1,11 +1,11 @@
 //@ts-ignore
 import styles from './CategoriesItem.module.scss'
 import { Link } from 'react-router-dom'
-import { ICategory } from '../../types/ICategory'
 import { FC } from 'react'
 import cn from 'classnames'
+import { ICategoryOption } from '../../data/categories.data'
 
-export const CategoriesItem: FC<{ category: ICategory }> = ({ category }) => {
+export const CategoriesItem: FC<{ category: ICategoryOption }> = ({ category }) => {
 
     // let myclassnames = cn(`wrapper:{backgroundColor:${category.color}}`)
 
@@ -27,7 +27,7 @@ export const CategoriesItem: FC<{ category: ICategory }> = ({ category }) => {
                         </div>
 
                         <div className={styles.cartInfo}>
-                            <h4>{category.name}</h4>
+                            <h4>{category.value}</h4>
                             <p>
                                 <span>234</span>&nbsp; -
                                 объявлений на сайте

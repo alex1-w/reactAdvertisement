@@ -4,8 +4,10 @@ import { Categories } from "./pages/Categories/Categories";
 import { CreateAd } from "./pages/CreateAd/CreateAd";
 import { Layout } from "./Layout/Layout";
 import { Advertisement } from "./pages/Advertisement/Advertisement";
+import { useThemeProvider } from "./providers/ThemeContext";
 
 function App() {
+
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
@@ -13,6 +15,7 @@ function App() {
         <Route index element={<Ads />} />
         <Route path="/categories" element={<Categories />} />
         <Route path="/create-ad" element={<CreateAd />} />
+        {/* <Route path="/advertisement/:id" element={<Advertisement />} /> */}
         <Route path="/advertisement/:id" element={<Advertisement />} />
         <Route />
       </Route>

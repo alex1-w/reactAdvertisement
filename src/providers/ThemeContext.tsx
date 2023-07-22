@@ -1,41 +1,64 @@
-import React, { Dispatch, SetStateAction, createContext, useState, useContext, FC } from "react";
-
+import React, {createContext,useState,useContext,FC, useEffect,} from "react";
 // type TypeSetState<T> = Dispatch<SetStateAction<T>>
 interface IThemeProvider {
-    children: React.ReactNode
+  children: React.ReactNode;
 }
+type themeType = "light" | "dark"
 
 interface IThemeContext {
-    type: "light" | "dark"
-    changeOnDark: () => void
-    changeOnLight: () => void
-    // setType: TypeSetState<string>
+    theme: themeType;
+    changeTheme: (_theme: themeType)=> void;
 }
 
 export const ThemeContext = createContext<IThemeContext>({
-    type: "light",
-    changeOnDark: () => { return null },
-    changeOnLight: () => { return null }
-})
-export const useThemeProvider = () => { return useContext(ThemeContext) }
+    theme: "light",
+    changeTheme:(_theme: themeType) => {return null}
+});
 
-export const ThemeProvider: FC<IThemeProvider> = ({ children }) => {
-
-    const [type, setType] = useState<"light" | "dark">("light")
-
-    const changeOnDark = () => {
-        setType('dark')
-        console.log("dark");
+const getTheme = ()=>{
+    let theme = localStorage.getItem('theme') 
+    if(!theme){
+        localStorage.setItem('theme', 'light');
+        theme = 'light';
     }
-    const changeOnLight = () => {
-        setType('light')
-        console.log('light');
-    }
-
-    return (
-        <ThemeContext.Provider value={{ changeOnDark, type, changeOnLight }}>
-            {children}
-        </ThemeContext.Provider>
-    )
+    return theme;
 }
 
+export const ThemeProvider: FC<IThemeProvider> = ({ children }) => {
+    const [theme, setTheme] = useState<any>(getTheme)
+    //////////////////////////////////////////////
+    // вопрос по функциям
+
+    const changeTheme = ()=>{
+        setTheme((currentTheme: themeType) => {
+            const newTheme = currentTheme === "light" ? "dark" : "light";
+            localStorage.setItem("theme", newTheme);
+            return newTheme;
+        });
+    }
+    //////////////////////////////////////////////
+
+    // const resolve = (theme: themeType)=>{
+    //     const newTheme = theme === "light" ? "dark" : "light"
+    //     localStorage.setItem("theme", newTheme);
+    //     return newTheme
+    // }
+    // const changeTheme = ()=>{
+    //     setTheme(resolve)
+    // } 
+
+    useEffect(() => {
+        localStorage.setItem('theme', theme)
+        // console.log(theme);
+    }, [theme])
+
+  return (
+    <ThemeContext.Provider value={{  theme, changeTheme  }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+};
+
+export const useThemeProvider = () => {
+  return useContext(ThemeContext);
+};

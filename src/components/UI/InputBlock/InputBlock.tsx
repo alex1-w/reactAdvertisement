@@ -4,6 +4,7 @@ import { TextField } from "@mui/material";
 import { FC } from "react";
 import { RegisterOptions, UseFormRegister } from "react-hook-form";
 import { AnimatePresence, motion } from "framer-motion";
+// import { alpha, styled } from '@mui/material/styles';
 
 export interface IInputBlock {
   placeholder?: string;
@@ -18,21 +19,13 @@ export interface IInputBlock {
   isMulti?: number;
 }
 
-export const InputBlock: FC<IInputBlock> = ({
-  errors,
-  name,
-  placeholder,
-  register,
-  rules,
-  size,
-  type,
-  label,
-  isMulti,
-}) => {
+export const InputBlock: FC<IInputBlock> = ({errors, name, placeholder,  register,  rules, size, type, label, isMulti, }) => {
   return (
     <div className={styles.main}>
       <TextField
-        // color="warning"
+        // color="info"
+        // variant="outlined"
+        
         placeholder={placeholder}
         type={type}
         size={size}
@@ -40,6 +33,12 @@ export const InputBlock: FC<IInputBlock> = ({
         label={label}
         multiline={Boolean(isMulti)}
         rows={isMulti}
+        style={{
+          // borderRadius:'10px',
+          // overflow: 'hidden'
+          
+        }}
+
         {...(register && register(name, { ...rules }))}
       />
 

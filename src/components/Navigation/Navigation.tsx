@@ -1,6 +1,6 @@
 //@ts-ignore
 import styles from './Navigation.module.scss';
-import { NavLink, useRouteError } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import cn from 'classnames';
 import { useModalContext } from '../UI/ModalProvider/ModalProvider';
 import { FC } from 'react';

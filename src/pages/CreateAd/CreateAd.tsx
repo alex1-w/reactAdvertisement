@@ -14,7 +14,7 @@ import { DropzoneBlock } from "../../components/UI/DropzoneBlock/DropzoneBlock";
 
 const getValue = (value: string) => {
   return value ? categories.find((option) => option.value === value) : "";
-}
+};
 
 export interface ICreateAdForm {
   category: string;
@@ -24,18 +24,22 @@ export interface ICreateAdForm {
 }
 
 export const CreateAd = () => {
-
-  const { register, handleSubmit, control, formState: { isValid, errors }, watch }
-    = useForm({
-      mode: "onBlur",
-      reValidateMode: 'onChange',
-      defaultValues: {
-        category: "",
-        title: "",
-        description: "",
-        image: "",
-      },
-    });
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { isValid, errors },
+    watch,
+  } = useForm({
+    mode: "onBlur",
+    reValidateMode: "onChange",
+    defaultValues: {
+      category: "",
+      title: "",
+      description: "",
+      image: "",
+    },
+  });
 
   const { mutateAsync } = useMutation(
     ["createAdvertisement"],
@@ -51,9 +55,7 @@ export const CreateAd = () => {
     }
   );
 
-  const img = watch('image')
-
-
+  const img = watch("image");
   const onSubmit = async (createAdForm: ICreateAdForm) => {
     console.log(img[0]);
     // if (!createAdForm.category)
@@ -67,7 +69,6 @@ export const CreateAd = () => {
     <Container>
       <form className={styles.wrapper} onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.mainBlock}>
-
           <div className={styles.inputBlock}>
             <h3>Название</h3>
             <InputBlock
@@ -75,10 +76,10 @@ export const CreateAd = () => {
               name="title"
               register={register}
               rules={{
-                required: { value: true, message: 'поле обязательно' },
-                minLength: { value: 2, message: "min - 2" }
+                required: { value: true, message: "поле обязательно" },
+                minLength: { value: 2, message: "min - 2" },
               }}
-              size="medium"
+              size="small"
               type="text"
               label="title"
               placeholder="title"
@@ -88,12 +89,10 @@ export const CreateAd = () => {
           <div className={styles.categoryBlock}>
             <h3>Категория</h3>
             <Controller
-              rules={{ required: { value: true, message: 'обязательно' } }}
+              rules={{ required: { value: true, message: "обязательно" } }}
               control={control}
               name="category"
-              render={({
-                field: { name, value, onChange },
-              }) => (
+              render={({ field: { name, value, onChange } }) => (
                 <div className={styles.main}>
                   <ReactSelect
                     value={getValue(value)}
@@ -122,7 +121,13 @@ export const CreateAd = () => {
             errors={errors}
             name="description"
             register={register}
-            rules={{ minLength: { value: 2, message: "min - 2" } }}
+            rules={{
+              required: {
+                value: true,
+                message: "поле обязательно",
+              },
+              minLength: { value: 2, message: "min - 2" },
+            }}
             size="medium"
             heading="Описание"
             type="text"
@@ -131,12 +136,7 @@ export const CreateAd = () => {
             isMulti={4}
           />
 
-          <DropzoneBlock
-            control={control}
-            errors={errors}
-            name="image"
-          />
-
+          <DropzoneBlock control={control} errors={errors} name="image" />
         </div>
 
         <div className={styles.wrapper__borderBottom}></div>
@@ -145,6 +145,6 @@ export const CreateAd = () => {
           SUBMIT
         </Button>
       </form>
-    </Container >
+    </Container>
   );
 };

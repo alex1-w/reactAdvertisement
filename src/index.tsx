@@ -18,18 +18,19 @@ const queryClient = new QueryClient({
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
 root.render(
   <BrowserRouter>
     <QueryClientProvider client={queryClient}>
 
       <SnackbarProvider>
-
-        <ThemeProvider>
-          <ModalProvider>
-            <App />
-          </ModalProvider>
-        </ThemeProvider>
-
+  
+          <ThemeProvider>
+            <ModalProvider>
+              <App />
+            </ModalProvider>
+          </ThemeProvider>
+  
       </SnackbarProvider>
 
     </QueryClientProvider>

@@ -7,24 +7,24 @@ import { useEffect } from "react"
 
 
 export const Layout = () => {
-    const { type } = useThemeProvider()
+    const { theme } = useThemeProvider()
 
     useEffect(() => {
         const root = document.querySelector(':root') as any
         if (root) {
-            console.log(root);
+            // console.log(root);
             
-            if (type === 'dark') {
+            if (theme === 'dark') {
                 root.style.setProperty(
                     '--primary-bg', 'rgb(27, 27, 27)'
                 )
             }
-            if (type === 'light') { }
+            if (theme === 'light') { }
         }
-    }, [type])
+    }, [theme])
 
     return (
-        <div className={cn('layout', { dark: type === 'dark' })}>
+        <div className={cn('layout', { dark: theme === 'dark' })}>
             <Header />
             <Outlet />
             <Footer />

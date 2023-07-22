@@ -6,26 +6,26 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 import { motion } from 'framer-motion'
 
 export const ThemeButton = () => {
-    const { changeOnDark, type, changeOnLight } = useThemeProvider()
+    const { theme, changeTheme } = useThemeProvider()
 
     return (
         <>
-            {type === 'light' &&
+            {theme === 'light' &&
                 <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    onClick={changeOnDark}
+                    onClick={ () => changeTheme('dark') }
                     className={styles.main}
-                >
+                    >
                     <DarkModeIcon className={styles.btn} />
                 </motion.div>
             }
 
-            {type === 'dark' &&
+            {theme === 'dark' &&
                 <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    onClick={changeOnLight}
+                    onClick={ () =>changeTheme('light') }
                     className={styles.main}
                 >
                     <LightModeIcon className={styles.btn} />

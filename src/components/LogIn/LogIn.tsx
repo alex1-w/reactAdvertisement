@@ -10,13 +10,12 @@ import { useMutation } from "react-query";
 import { userService } from "../../services/userService/userService";
 import { IUserService } from "../../services/userService/IUserService";
 import Cookies from "js-cookie";
+import { useModalContext } from "../UI/ModalProvider/ModalProvider";
 
 export const LogIn = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isValid },
-  } = useForm({
+  const { closeModal } = useModalContext()
+
+  const { register, handleSubmit, formState: { errors, isValid } } = useForm({
     mode: "onBlur",
     reValidateMode: "onChange",
     defaultValues: {
@@ -29,10 +28,12 @@ export const LogIn = () => {
   const { mutateAsync } = useMutation(
     ["authenticate"],
     (body: IUserService) => userService.authenticate(body),
+
     {
       onSuccess: ({ data }) => {
         Cookies.set("userToken", data.token);
         enqueueSnackbar("успешно", { variant: "success" });
+        closeModal()
       },
       onError: () => {
         enqueueSnackbar("ошибка", { variant: "error" });

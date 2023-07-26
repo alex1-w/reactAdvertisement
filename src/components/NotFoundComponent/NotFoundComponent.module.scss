@@ -1,0 +1,19 @@
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    min-width: 360px;
+    max-width: 500px;
+    width: 90%;
+    height: 100px;
+    background-color: rgb(192, 0, 0);
+    padding: 20px;
+    border-radius: 4px;
+
+    p {
+        color: white;
+        font-size: 24px;
+        font-weight: 800;
+    }
+}

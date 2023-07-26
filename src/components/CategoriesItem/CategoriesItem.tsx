@@ -13,14 +13,12 @@ export const CategoriesItem: FC<{ category: ICategoryOption }> = ({ category }) 
         <section>
 
             <div className={styles.main}>
-                {/* <div className={cn(styles.wrapper, myclassnames)}> */}
                 <div
-                    //////////////////////////////////////////////////////////////////////////////
                     className={cn(styles.wrapper)}
                     style={{ backgroundColor: category.color }}
                 >
 
-                    <Link to={category.link} className={styles.contentBlock}>
+                    <Link to='/' className={styles.contentBlock}>
 
                         <div className={styles.imgBlock}>
                             {category.image}

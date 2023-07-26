@@ -11,6 +11,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import ReactSelect from "react-select";
 import { InputBlock } from "../../components/UI/InputBlock/InputBlock";
 import { DropzoneBlock } from "../../components/UI/DropzoneBlock/DropzoneBlock";
+import { DropFileBlock } from "../../components/UI/DropFileBlock/DropFileBlock";
+import { IAdvertisement } from "../../services/advertisementService/advertisementservice.interface";
 
 const getValue = (value: string) => {
   return value ? categories.find((option) => option.value === value) : "";
@@ -24,26 +26,21 @@ export interface ICreateAdForm {
 }
 
 export const CreateAd = () => {
-  const {
-    register,
-    handleSubmit,
-    control,
-    formState: { isValid, errors },
-    watch,
-  } = useForm({
-    mode: "onBlur",
-    reValidateMode: "onChange",
-    defaultValues: {
-      category: "",
-      title: "",
-      description: "",
-      image: "",
-    },
-  });
+  const { register, handleSubmit, control, formState: { isValid, errors }, watch, } = useForm(
+    {
+      mode: "onBlur",
+      reValidateMode: "onChange",
+      defaultValues: {
+        category: "",
+        title: "",
+        description: "",
+        image: "",
+      },
+    });
 
   const { mutateAsync } = useMutation(
     ["createAdvertisement"],
-    (createAdForm: ICreateAdForm) =>
+    (createAdForm: any) =>
       advertisementService.createAdvertisement(createAdForm),
     {
       onError: (error) => {
@@ -56,6 +53,7 @@ export const CreateAd = () => {
   );
 
   const img = watch("image");
+
   const onSubmit = async (createAdForm: ICreateAdForm) => {
     console.log(img[0]);
     // if (!createAdForm.category)
@@ -136,7 +134,8 @@ export const CreateAd = () => {
             isMulti={4}
           />
 
-          <DropzoneBlock control={control} errors={errors} name="image" />
+          {/* <DropzoneBlock control={control} errors={errors} name="image" /> */}
+          <DropFileBlock />
         </div>
 
         <div className={styles.wrapper__borderBottom}></div>

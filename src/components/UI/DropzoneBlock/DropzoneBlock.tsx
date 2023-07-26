@@ -5,12 +5,11 @@ import Dropzone, { useDropzone } from "react-dropzone";
 import { FC } from "react";
 import { fileIcon } from "../../../data/categories.data";
 import { ICreateAdForm } from "../../../pages/CreateAd/CreateAd";
-import React, { useCallback } from "react";
+import { useCallback } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 interface IDropzoneBlock {
   name: "category" | "title" | "description" | "image";
-  // name: string;
   errors: FieldErrors<ICreateAdForm>;
   control: Control<ICreateAdForm>;
 }
@@ -40,28 +39,32 @@ export const DropzoneBlock: FC<IDropzoneBlock> = ({
     <>
       <div className={styles.dropZone}>
         <Controller
-          rules={{ required: { value: true, message: "поле обязательно" } }}
           control={control}
           name={name}
+          rules={{ required: { value: true, message: "поле обязательно" } }}
           render={({ field: { value, onChange, onBlur } }) => (
             <>
               <Dropzone onDrop={onChange as any} multiple={true}>
                 {({ getRootProps, getInputProps }) => (
-                  <div>
-                    <section>
-                      <div
-                        {...getRootProps()}
-                        className={styles.dropZone__dropSection}
-                      >
-                        {fileIcon}
-                        <div>
-                          <input {...getInputProps()} />
-                          <p>File Up</p>
-                        </div>
+                  <section>
+                    <div
+                      {...getRootProps()}
+                      className={styles.dropZone__dropSection}
+                    >
+                      {fileIcon}
+                      <div>
+                        {/* <input {...getInputProps()} /> */}
+                        <input
+                          placeholder="fewfew"
+                          {...getInputProps()}
+                          type="text"
+                          name={name}
+                          onBlur={onBlur}
+                        />
+                        <p>File Up</p>
                       </div>
-                    </section>
-                    {/* <div>{`${value[0]}`}</div> */}
-                  </div>
+                    </div>
+                  </section>
                 )}
               </Dropzone>
               {/* <AnimatePresence>

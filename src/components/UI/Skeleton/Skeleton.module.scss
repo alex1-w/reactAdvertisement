@@ -1,0 +1,39 @@
+.total_skeletons {
+    background: linear-gradient(
+        90deg,
+        rgba(190, 190, 190, 0.2) 25%,
+        rgba(129, 129, 129, 0.24) 37%,
+        rgba(190, 190, 190, 0.2) 63%
+    );
+    display: inline-block;
+    background-size: 400% 100%;
+    animation: total_skeleton_animation 1.4s ease infinite;
+    -webkit-animation: 1.4s ease infinite total_skeleton_animation;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    cursor: default;
+    color: transparent;
+    pointer-events: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+@keyframes total_skeleton_animation {
+    0% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0 50%;
+    }
+}
+
+@-webkit-keyframes total_skeleton_animation {
+    0% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0 50%;
+    }
+}

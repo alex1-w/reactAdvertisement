@@ -20,7 +20,7 @@ export const AdvertisementItem: FC<{ advertisement: IAdvertisementProps }> = ({ 
             <div className={styles.wrapper}>
 
                 <div className={styles.imgBlock}>
-                    <img src={advertisement.image} alt="" />
+                    <img src={advertisement.image} alt={advertisement.name} />
                 </div>
 
                 <div className={styles.adDescription}>

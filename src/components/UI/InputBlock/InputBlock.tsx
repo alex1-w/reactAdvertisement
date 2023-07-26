@@ -23,9 +23,6 @@ export const InputBlock: FC<IInputBlock> = ({errors, name, placeholder,  registe
   return (
     <div className={styles.main}>
       <TextField
-        // color="info"
-        // variant="outlined"
-        
         placeholder={placeholder}
         type={type}
         size={size}
@@ -36,7 +33,6 @@ export const InputBlock: FC<IInputBlock> = ({errors, name, placeholder,  registe
         style={{
           // borderRadius:'10px',
           // overflow: 'hidden'
-          
         }}
 
         {...(register && register(name, { ...rules }))}

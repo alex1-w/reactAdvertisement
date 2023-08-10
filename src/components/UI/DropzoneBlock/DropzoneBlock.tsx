@@ -9,7 +9,7 @@ import { useCallback } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 interface IDropzoneBlock {
-  name: "category" | "title" | "description" | "image";
+  name: "category" | "name" | "description" | "image";
   errors: FieldErrors<ICreateAdForm>;
   control: Control<ICreateAdForm>;
 }
@@ -33,57 +33,50 @@ export const DropzoneBlock: FC<IDropzoneBlock> = ({
       reader.readAsArrayBuffer(file);
     });
   }, []);
-  const { getRootProps, getInputProps } = useDropzone({ onDrop });
+  // const { getRootProps, getInputProps } = useDropzone({ onDrop });
 
   return (
-    <>
-      <div className={styles.dropZone}>
-        <Controller
-          control={control}
-          name={name}
-          rules={{ required: { value: true, message: "поле обязательно" } }}
-          render={({ field: { value, onChange, onBlur } }) => (
-            <>
-              <Dropzone onDrop={onChange as any} multiple={true}>
-                {({ getRootProps, getInputProps }) => (
-                  <section>
-                    <div
-                      {...getRootProps()}
-                      className={styles.dropZone__dropSection}
-                    >
-                      {fileIcon}
-                      <div>
-                        {/* <input {...getInputProps()} /> */}
-                        <input
-                          placeholder="fewfew"
-                          {...getInputProps()}
-                          type="text"
-                          name={name}
-                          onBlur={onBlur}
-                        />
-                        <p>File Up</p>
-                      </div>
-                    </div>
-                  </section>
-                )}
-              </Dropzone>
-              {/* <AnimatePresence>
-                {errors[name] && (
-                  <motion.p
-                    initial={{ height: 0, y: "-100" }}
-                    animate={{ height: "auto", y: 0 }}
-                    exit={{ height: 0, y: "-100" }}
-                  >
-                    {errors[name] && errors[name].message}
-                  </motion.p>
-                )}
-              </AnimatePresence> */}
-            </>
-          )}
-        />
-        {/* <input disabled placeholder="тут будут ваши файлы" className={styles.dropZone__fileSection}></input> */}
-        <div className={styles.dropZone__fileSection}></div>
-      </div>
-    </>
+    <div className={styles.dropZone}>
+      <Controller
+        control={control}
+        name={name}
+        rules={{ required: { value: true, message: "поле обязательно" } }}
+        // rules={{}}
+        render={({ field: { value, onChange, onBlur } }) => (
+          <>
+            <Dropzone onDrop={onChange as any} multiple={true}>
+              {({ getRootProps, getInputProps }) => (
+                <div {...getRootProps()} className={styles.dropZone__dropSection} >
+                  {fileIcon}
+                  <div>
+                    <input
+                      placeholder="fewfew"
+                      {...getInputProps()}
+                      type="text"
+                      name={name}
+                      onBlur={onBlur}
+                    />
+                    <p>File Up</p>
+                  </div>
+                </div>
+              )}
+            </Dropzone>
+          </>
+        )}
+      />
+      <div className={styles.dropZone__fileSection}></div>
+      <AnimatePresence>
+        {errors && (
+          <motion.p
+            className={styles.dropZone__dropSection__errorBlock}
+            initial={{ height: 0, y: "-100" }}
+            animate={{ height: "auto", y: 0 }}
+            exit={{ height: 0, y: "-100" }}
+          >
+            {/* {errors && errors} */}
+          </motion.p>
+        )}
+      </AnimatePresence>
+    </div>
   );
 };

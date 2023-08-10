@@ -1,0 +1,39 @@
+.categoryBlock {
+    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: rgba(41, 41, 255, 0.167);
+    border-radius: 10px;
+    padding: 20px 10px;
+    z-index: 10;
+
+    p {
+        color: rgb(126, 0, 0);
+        font-weight: 500;
+        padding: 10px 0 0 5px;
+    }
+
+
+    &__selectBlock {
+        display: flex;
+        flex-direction: column;
+
+        select {
+            border-radius: 10px;
+            height: 60px;
+
+            option {
+                background-color: rgba(41, 41, 255, 0.267);
+                width: 20px;
+                height: 20px;
+            }
+        }
+    }
+}
+
+.selectSkeleton {
+    background-color: rgba(128, 128, 128, 0.298);
+    width: 100%;
+    height: 50px;
+    border-radius: 5px;
+}

@@ -11,9 +11,11 @@ import { userService } from "../../services/userService/userService";
 import { IUserService } from "../../services/userService/IUserService";
 import Cookies from "js-cookie";
 import { useModalContext } from "../UI/ModalProvider/ModalProvider";
+import { useUserContext } from "../../providers/UserProvider";
 
 export const LogIn = () => {
   const { closeModal } = useModalContext()
+  const { setIsAuth } = useUserContext()
 
   const { register, handleSubmit, formState: { errors, isValid } } = useForm({
     mode: "onBlur",
@@ -25,13 +27,16 @@ export const LogIn = () => {
     },
   });
 
+
   const { mutateAsync } = useMutation(
     ["authenticate"],
     (body: IUserService) => userService.authenticate(body),
-
     {
       onSuccess: ({ data }) => {
-        Cookies.set("userToken", data.token);
+        // тут получаем TOKEN с сервера и устанавливаем его в COOKIES
+        Cookies.set("userToken", data.token, { expires: 1 });
+
+        setIsAuth(true)
         enqueueSnackbar("успешно", { variant: "success" });
         closeModal()
       },
@@ -41,17 +46,14 @@ export const LogIn = () => {
     }
   );
 
-  const onSubmit: SubmitHandler<ILoginForm> = async (data) => {
-    console.log(data);
-    mutateAsync(data);
-  };
+  const onSubmit: SubmitHandler<ILoginForm> = async (data) => mutateAsync(data)
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.inputsBlock}>
       <div className={styles.inputsWrapper}>
         <InputBlock
           placeholder="login"
-          errors={errors}
+          errors={errors?.login?.message}
           name="login"
           register={register}
           rules={{
@@ -71,7 +73,7 @@ export const LogIn = () => {
 
         <InputBlock
           placeholder="password"
-          errors={errors}
+          errors={errors?.password?.message}
           name="password"
           register={register}
           rules={{

@@ -1,10 +1,11 @@
 //@ts-ignore
 import styles from "./InputBlock.module.scss";
 import { TextField } from "@mui/material";
-import { FC } from "react";
+import { FC, HTMLAttributes } from "react";
 import { RegisterOptions, UseFormRegister } from "react-hook-form";
 import { AnimatePresence, motion } from "framer-motion";
 // import { alpha, styled } from '@mui/material/styles';
+import cn from 'classnames'
 
 export interface IInputBlock {
   placeholder?: string;
@@ -13,17 +14,17 @@ export interface IInputBlock {
   size: "small" | "medium";
   type: "number" | "text" | "password";
   register: UseFormRegister<any>;
-  errors: any;
+  errors: string | undefined;
   rules: RegisterOptions;
-  //   isMulti?: { multiline: boolean; rows: number };
   isMulti?: number;
+  className?: HTMLAttributes<HTMLDivElement>
 }
 
-export const InputBlock: FC<IInputBlock> = ({errors, name, placeholder,  register,  rules, size, type, label, isMulti, }) => {
+export const InputBlock: FC<IInputBlock> = ({ errors, name, placeholder, register, rules, size, type, label, isMulti, className }) => {
+
   return (
-    <div className={styles.main}>
+    <div className={cn(styles.main, className)}>
       <TextField
-        placeholder={placeholder}
         type={type}
         size={size}
         className={styles.inp}
@@ -31,21 +32,20 @@ export const InputBlock: FC<IInputBlock> = ({errors, name, placeholder,  registe
         multiline={Boolean(isMulti)}
         rows={isMulti}
         style={{
-          // borderRadius:'10px',
-          // overflow: 'hidden'
+          borderRadius: '7px',
+          overflow: 'hidden'
         }}
-
         {...(register && register(name, { ...rules }))}
       />
 
       <AnimatePresence>
-        {errors[name] && (
+        {errors && (
           <motion.p
             initial={{ height: 0, y: "-100" }}
             animate={{ height: "auto", y: 0 }}
             exit={{ height: 0, y: "-100" }}
           >
-            {errors[name].message}
+            {errors}
           </motion.p>
         )}
       </AnimatePresence>

@@ -12,29 +12,25 @@ import { AxiosError } from "axios";
 import { InputBlock } from "../UI/InputBlock/InputBlock";
 import { fieldNameCheck } from "../../helpers/validateHelpers";
 import { ISignForm } from "../../types/ISignForm";
+import { useAuthenticationWrapperContext } from "../../providers/Authentication";
 
 export const SignIn = () => {
-  const {
-    register,
-    handleSubmit,
-    setError,
-    formState: { errors, isValid, submitCount },
-  } = useForm({
-    mode: "onBlur",
-    reValidateMode: "onChange",
-    defaultValues: {
-      login: "",
-      password: "",
-      repeatPassword: "",
-    },
-  });
+  const { changeWrapper } = useAuthenticationWrapperContext()
+  const { register, handleSubmit, setError, formState: { errors, isValid, submitCount } } = useForm(
+    {
+      mode: "onBlur",
+      reValidateMode: "onChange",
+      defaultValues: {
+        login: "",
+        password: "",
+        repeatPassword: "",
+      },
+    });
 
-  const [loading, setLoading] = useState(true);
-  function handleClick() {
-    setLoading(true);
-  }
-  // const queryClient = useQueryClient();
-  // console.log(queryClient.getQueryData(["signIn"]));
+  // const [loading, setLoading] = useState(true);
+  // function handleClick() {
+  //   setLoading(true);
+  // }
 
   const { isLoading, mutateAsync, isSuccess } =
     useMutation(
@@ -42,12 +38,12 @@ export const SignIn = () => {
       (body: IUserService) => userService.registration(body),
       {
         onSuccess: (data) => {
-          enqueueSnackbar("вы успешно запегистрированы", { variant: "error" });
-          console.log(data);
+          enqueueSnackbar("вы успешно запегистрированы", { variant: "success" });
+          changeWrapper('login')
         },
         onError: (error: AxiosError<{ message: string }>) => {
           console.log(error);
-          enqueueSnackbar(error.response?.data?.message, { variant: "error" });
+          enqueueSnackbar(`${error.response?.data?.message}`, { variant: "error" });
         },
       }
     );
@@ -65,8 +61,6 @@ export const SignIn = () => {
     }
     const body = { login: formData.login, password: formData.password };
     mutateAsync(body);
-    // if (isSuccess) return console.log('вход разрешен');
-    // return console.log('нет');
   };
 
   return (
@@ -75,7 +69,7 @@ export const SignIn = () => {
 
         <InputBlock
           placeholder="login"
-          errors={errors}
+          errors={errors?.login?.message}
           name="login"
           register={register}
           rules={{
@@ -92,7 +86,7 @@ export const SignIn = () => {
 
         <InputBlock
           placeholder="password"
-          errors={errors}
+          errors={errors?.password?.message}
           name="password"
           register={register}
           rules={{
@@ -112,7 +106,7 @@ export const SignIn = () => {
 
         <InputBlock
           placeholder="repeat password"
-          errors={errors}
+          errors={errors?.repeatPassword?.message}
           name="repeatPassword"
           register={register}
           rules={{

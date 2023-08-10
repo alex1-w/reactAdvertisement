@@ -1,0 +1,36 @@
+.main {
+    // border: 1px solid red;
+    position: absolute;
+    padding: 10px;
+    top: 60%;
+    right: 14%;
+    z-index: 20;
+}
+
+.categoryItem {
+    display: flex;
+    padding: 4px 10px;
+    background-color: rgb(156, 156, 156);
+    justify-content: space-between;
+    transition: all 0.2s;
+
+    &:hover {
+        transition: all 0.2s;
+        scale: 1.05;
+        background-color: rgb(121, 121, 121);
+    }
+}
+
+.wrapper {
+    border-radius: 6px;
+    width: 290px;
+    max-height: 200px;
+    background-color: rgb(214, 214, 214);
+}
+
+.categoryBlock {
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}

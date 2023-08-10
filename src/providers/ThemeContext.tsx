@@ -1,59 +1,47 @@
-import React, {createContext,useState,useContext,FC, useEffect,} from "react";
+import React, { createContext, useState, useContext, FC, useEffect, } from "react";
 // type TypeSetState<T> = Dispatch<SetStateAction<T>>
+type themeType = "light" | "dark"
+
 interface IThemeProvider {
   children: React.ReactNode;
 }
-type themeType = "light" | "dark"
 
 interface IThemeContext {
-    theme: themeType;
-    changeTheme: (_theme: themeType)=> void;
+  theme: themeType;
+  changeTheme: (_theme: themeType) => void;
 }
 
 export const ThemeContext = createContext<IThemeContext>({
-    theme: "light",
-    changeTheme:(_theme: themeType) => {return null}
+  theme: "light",
+  changeTheme: (_theme: themeType) => { return null }
 });
 
-const getTheme = ()=>{
-    let theme = localStorage.getItem('theme') 
-    if(!theme){
-        localStorage.setItem('theme', 'light');
-        theme = 'light';
-    }
-    return theme;
+const getTheme = () => {
+  let theme = localStorage.getItem('theme')
+  if (!theme) {
+    localStorage.setItem('theme', 'light');
+    theme = 'light';
+  }
+  return theme;
 }
 
 export const ThemeProvider: FC<IThemeProvider> = ({ children }) => {
-    const [theme, setTheme] = useState<any>(getTheme)
-    //////////////////////////////////////////////
-    // вопрос по функциям
+  const [theme, setTheme] = useState<any>(getTheme)
 
-    const changeTheme = ()=>{
-        setTheme((currentTheme: themeType) => {
-            const newTheme = currentTheme === "light" ? "dark" : "light";
-            localStorage.setItem("theme", newTheme);
-            return newTheme;
-        });
-    }
-    //////////////////////////////////////////////
+  const changeTheme = () => {
+    setTheme((currentTheme: themeType) => {
+      const newTheme = currentTheme === "light" ? "dark" : "light";
+      localStorage.setItem("theme", newTheme);
+      return newTheme;
+    });
+  }
 
-    // const resolve = (theme: themeType)=>{
-    //     const newTheme = theme === "light" ? "dark" : "light"
-    //     localStorage.setItem("theme", newTheme);
-    //     return newTheme
-    // }
-    // const changeTheme = ()=>{
-    //     setTheme(resolve)
-    // } 
-
-    useEffect(() => {
-        localStorage.setItem('theme', theme)
-        // console.log(theme);
-    }, [theme])
+  useEffect(() => {
+    localStorage.setItem('theme', theme)
+  }, [theme])
 
   return (
-    <ThemeContext.Provider value={{  theme, changeTheme  }}>
+    <ThemeContext.Provider value={{ theme, changeTheme }}>
       {children}
     </ThemeContext.Provider>
   );

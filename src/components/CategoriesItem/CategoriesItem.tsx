@@ -2,41 +2,13 @@
 import styles from './CategoriesItem.module.scss'
 import { Link } from 'react-router-dom'
 import { FC } from 'react'
-import cn from 'classnames'
-import { ICategoryOption } from '../../data/categories.data'
+import { ICategory } from '../../types/ICategoryOption'
 
-export const CategoriesItem: FC<{ category: ICategoryOption }> = ({ category }) => {
-
-    // let myclassnames = cn(`wrapper:{backgroundColor:${category.color}}`)
+export const CategoriesItem: FC<{ category: ICategory }> = ({ category }) => {
 
     return (
         <section>
-
-            <div className={styles.main}>
-                <div
-                    className={cn(styles.wrapper)}
-                    style={{ backgroundColor: category.color }}
-                >
-
-                    <Link to='/' className={styles.contentBlock}>
-
-                        <div className={styles.imgBlock}>
-                            {category.image}
-                        </div>
-
-                        <div className={styles.cartInfo}>
-                            <h4>{category.value}</h4>
-                            <p>
-                                <span>234</span>&nbsp; -
-                                объявлений на сайте
-                            </p>
-                        </div>
-
-                    </Link>
-
-                </div>
-            </div>
-
+            {category.name}
         </section>
     )
 }

@@ -7,7 +7,9 @@ import { useQuery } from 'react-query'
 import { advertisementService } from '../../services/advertisementService/advertisementService'
 import { Skeleton } from '../../components/UI/Skeleton/Skeleton'
 import { NotFoundComponent } from '../../components/NotFoundComponent/NotFoundComponent'
-import { categoryService } from '../../services/categoryService'
+import { categoryService } from '../../services/categoryService/categoryService'
+
+// const skeletons = Object.create(null)
 
 export const Ads = () => {
 
@@ -20,47 +22,43 @@ export const Ads = () => {
         () => categoryService.getCategories(),
     )
 
-    // console.log(advertisementsData?.data);
-    // console.log(categoriesData?.data);
-
     return (
-        <>
-            <Container>
-                <section className={styles.categoryBlock}>
-                    <div className={styles.categoryBlock__wrapper}>
+        <div className={styles.wrapper}>
+            <section className={styles.categoryBlock}>
+                <div className={styles.categoryBlock__wrapper}>
 
-                        <h2>Популярные категории:</h2>
+                    <h2>Популярные категории:</h2>
 
-                        {isCategoriesLoading ?
-                            <div className={styles.categoryBlock__categoriesGrid}>
-                                <Skeleton className={styles.categorySkeleton} />
-                                <Skeleton className={styles.categorySkeleton} />
-                                <Skeleton className={styles.categorySkeleton} />
-                                <Skeleton className={styles.categorySkeleton} />
-                                <Skeleton className={styles.categorySkeleton} />
-                                <Skeleton className={styles.categorySkeleton} />
-                                <Skeleton className={styles.categorySkeleton} />
-                                <Skeleton className={styles.categorySkeleton} />
-                            </div>
-                            :
-                            <>
-                                {
-                                    !categoriesData?.data.length
-                                        ?
-                                        <NotFoundComponent /> :
-                                        <div className={styles.categoryBlock__categoriesGrid}>
-                                            {categoriesData?.data?.map((category: any) => (
-                                                <CategoriesItem category={category} key={category.value} />
-                                            ))}
-                                        </div>
-                                }
-                            </>
-                        }
+                    {isCategoriesLoading ?
+                        <div className={styles.categoryBlock__categoriesGrid}>
+                            <Skeleton className={styles.categorySkeleton} />
+                            <Skeleton className={styles.categorySkeleton} />
+                            <Skeleton className={styles.categorySkeleton} />
+                            <Skeleton className={styles.categorySkeleton} />
+                            <Skeleton className={styles.categorySkeleton} />
+                            <Skeleton className={styles.categorySkeleton} />
+                            <Skeleton className={styles.categorySkeleton} />
+                            <Skeleton className={styles.categorySkeleton} />
+                        </div>
+                        :
+                        <>
+                            {!categoriesData?.data.length
+                                ?
+                                <NotFoundComponent />
+                                :
+                                <div className={styles.categoryBlock__categoriesGrid}>
+                                    {categoriesData?.data?.map((category: any) => (
+                                        <CategoriesItem category={category} key={category.id} />
+                                    ))}
+                                </div>
+                            }
+                        </>
+                    }
+                </div>
+            </section>
 
-                    </div>
-                </section>
-
-                <section className={styles.main}>
+            <section className={styles.main}>
+                <Container>
 
                     <h1>Рекомендации для вас:</h1>
 
@@ -90,8 +88,8 @@ export const Ads = () => {
                             }
                         </>
                     }
-                </section>
-            </Container >
-        </>
+                </Container >
+            </section>
+        </div>
     )
 }

@@ -1,0 +1,44 @@
+.enterBlock {
+    cursor: pointer;
+    border: 2px solid rgba(0, 0, 0, 0.694);
+    border-radius: 18px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    transition: 0.3s all;
+
+    &:hover {
+        transition: 0.3s all;
+        box-shadow: 3px 5px 2px rgba(0, 0, 0, 0.24);
+        background-color: rgba(4, 238, 255, 0.237);
+    }
+
+    p {
+        font-weight: 700;
+    }
+}
+
+@media screen and (max-width: 930px) {
+    .enterBlock {
+        padding: 5px 10px;
+        justify-self: flex-end;
+        width: fit-content;
+        display: flex;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .enterBlock {
+        padding: 7px 10px;
+        justify-self: flex-end;
+        width: fit-content;
+        display: flex;
+        justify-content: center;
+
+        &__icon {
+            display: none;
+        }
+    }
+
+}

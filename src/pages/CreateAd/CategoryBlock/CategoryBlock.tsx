@@ -7,23 +7,13 @@ interface ICategoryBlock extends IInputBlock {
   heading: string;
 }
 
-export const CategoryBlock: FC<ICategoryBlock> = ({
-  errors,
-  name,
-  register,
-  rules,
-  size,
-  type,
-  label,
-  placeholder,
-  heading,
-  isMulti,
-}) => {
+export const CategoryBlock: FC<ICategoryBlock> = ({ errors, name, register, rules, size, type, label, heading, isMulti, }) => {
+
   return (
     <div className={styles.main}>
       <h3>{heading}</h3>
-      <div className={styles.inputBlock}>
 
+      <div className={styles.inputBlock}>
         <InputBlock
           errors={errors}
           name={name}
@@ -35,7 +25,6 @@ export const CategoryBlock: FC<ICategoryBlock> = ({
           isMulti={isMulti}
         />
       </div>
-
     </div>
   );
 };

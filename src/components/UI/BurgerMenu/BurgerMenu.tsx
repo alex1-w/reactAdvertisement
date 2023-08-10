@@ -1,51 +1,47 @@
 //@ts-ignore
 import styles from './BurgerMenu.module.scss';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Blackout } from '../../Blackout/Blackout';
-import { AnimatePresence, motion } from 'framer-motion'
 import { Navigation } from '../../Navigation/Navigation';
 import { ThemeButton } from '../ThemeButton/ThemeButton';
-import { TextField } from '@mui/material'
 import { DrawerMenu } from '../DrawerMenu/DrawerMenu';
 import { InputSearch } from '../InputSearch/InputSearch';
+import { useMenuProvider } from '../../../providers/MenuProvider';
 
 export const BurgerMenu = () => {
-    const [menuIsOpened, setMenuIsOpened] = useState<boolean>(false)
+    const { closeMenu, isMenuOpened, openMenu, menuHandler } = useMenuProvider()
     const burgerMenuRef = useRef<HTMLDivElement>(null)
 
-    const openMenu = () => {
-        burgerMenuRef.current?.classList.toggle(styles.opened)
-        setMenuIsOpened(!menuIsOpened)
+    const changeMenu = () => {
+        // burgerMenuRef.current?.classList.toggle(styles.opened)
+        menuHandler()
     }
+
+    useEffect(() => {
+        if (isMenuOpened === true) {
+            burgerMenuRef.current?.classList.add(styles.opened)
+        }
+        if (isMenuOpened === false) {
+            burgerMenuRef.current?.classList.remove(styles.opened)
+        }
+    }, [isMenuOpened])
 
     return (
         <>
-            <div
-                className={styles.main}
-                onClick={openMenu}
-                ref={burgerMenuRef}
-            >
+            <div className={styles.main} onClick={changeMenu} ref={burgerMenuRef} >
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
 
-            {menuIsOpened &&
-
+            {
+                isMenuOpened &&
                 <DrawerMenu>
-                    <>
-                        {/* <TextField type='search' variant='standard' color='warning' label='Search...' className={styles.inputItem} size='small' /> */}
-                        <InputSearch inputVariant='burgerMenuVariant' />
-                        <Navigation variant='burgerMenuVariant' />
-                        <ThemeButton />
-                    </>
+                    <InputSearch inputVariant='burgerMenuVariant' />
+                    <Navigation variant='burgerMenuVariant' />
+                    <ThemeButton />
                 </DrawerMenu>
-
             }
-
-
-
-
         </>
     )
 }

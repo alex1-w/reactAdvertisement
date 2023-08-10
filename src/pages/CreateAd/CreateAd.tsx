@@ -1,38 +1,31 @@
 //@ts-ignore
 import styles from "./CreateAd.module.scss";
 import { Button } from "@mui/material";
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { Container } from "../../components/Container/Container";
-import { categories } from "../../data/categories.data";
-import { useMutation } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import { advertisementService } from "../../services/advertisementService/advertisementService";
 import { CategoryBlock } from "./CategoryBlock/CategoryBlock";
-import { AnimatePresence, motion } from "framer-motion";
-import ReactSelect from "react-select";
 import { InputBlock } from "../../components/UI/InputBlock/InputBlock";
-import { DropzoneBlock } from "../../components/UI/DropzoneBlock/DropzoneBlock";
-import { DropFileBlock } from "../../components/UI/DropFileBlock/DropFileBlock";
-import { IAdvertisement } from "../../services/advertisementService/advertisementservice.interface";
-
-const getValue = (value: string) => {
-  return value ? categories.find((option) => option.value === value) : "";
-};
+import { enqueueSnackbar } from "notistack";
+import { SelectBlock } from "../../components/UI/SelectBlock/SelectBlock";
+import { categoryService } from "../../services/categoryService/categoryService";
 
 export interface ICreateAdForm {
   category: string;
-  title: string;
+  name: string;
   description: string;
   image: string;
 }
 
 export const CreateAd = () => {
-  const { register, handleSubmit, control, formState: { isValid, errors }, watch, } = useForm(
+  const { register, handleSubmit, control, formState: { isValid, errors }, watch, reset } = useForm(
     {
       mode: "onBlur",
       reValidateMode: "onChange",
       defaultValues: {
         category: "",
-        title: "",
+        name: "",
         description: "",
         image: "",
       },
@@ -40,110 +33,113 @@ export const CreateAd = () => {
 
   const { mutateAsync } = useMutation(
     ["createAdvertisement"],
-    (createAdForm: any) =>
+    (createAdForm: ICreateAdForm) =>
       advertisementService.createAdvertisement(createAdForm),
     {
       onError: (error) => {
-        console.log(error);
+        enqueueSnackbar("ошибка", { variant: "error" });
       },
       onSuccess: (data, body, context) => {
         console.log(data, body, context);
+        enqueueSnackbar("объявление добавлено", { variant: "success" });
       },
     }
   );
 
-  const img = watch("image");
+  const { data, isLoading } = useQuery(
+    ['categories-options'],
+    () => categoryService.getCategories(),
+  )
 
   const onSubmit = async (createAdForm: ICreateAdForm) => {
-    console.log(img[0]);
-    // if (!createAdForm.category)
-    //   setError("category", { message: "категория не выбрана" });
-    // return mutateAsync(createAdForm);
-    // console.log(createAdForm);
-    // console.log(createAdForm);
+    console.log(createAdForm);
+    mutateAsync(createAdForm)
+    reset()
   };
 
   return (
-    <Container>
-      <form className={styles.wrapper} onSubmit={handleSubmit(onSubmit)}>
-        <div className={styles.mainBlock}>
-          <div className={styles.inputBlock}>
-            <h3>Название</h3>
-            <InputBlock
-              errors={errors}
-              name="title"
+
+    <div className={styles.wrapper}>
+
+      <Container>
+        <form className={styles.main} onSubmit={handleSubmit(onSubmit)}>
+          <h1>Создание объявления</h1>
+          <div className={styles.mainBlock}>
+
+            <div className={styles.inputBlock}>
+              <h3>Название</h3>
+              <InputBlock
+                errors={errors?.name?.message}
+                name="name"
+                register={register}
+                rules={{
+                  required: { value: true, message: "поле обязательно" },
+                  minLength: { value: 2, message: "min - 2" }
+                }}
+                size="small"
+                type="text"
+                label="title"
+                placeholder="title"
+              />
+            </div>
+
+            {
+              isLoading
+                ?
+                <p>loadiong</p>
+                :
+                <div className={styles.selectBlock}>{
+                  data?.data &&
+                  <SelectBlock
+                    control={control}
+                    errors={errors}
+                    name="category"
+                    options={data?.data}
+                    rules={{}}
+                  />
+                }</div>
+            }
+
+            <CategoryBlock
+              errors={errors?.description?.message}
+              name="description"
               register={register}
               rules={{
-                required: { value: true, message: "поле обязательно" },
-                minLength: { value: 2, message: "min - 2" },
+                required: { value: true, message: "поле обязательно", },
+                minLength: { value: 20, message: "min - 200" },
               }}
+              size="medium"
+              heading="Описание"
+              type="text"
+              // label="title"
+              placeholder="title"
+              isMulti={4}
+            />
+
+            <CategoryBlock
+              errors={errors?.image?.message}
+              heading="Ссылка на картинку"
+              name="image"
+              register={register}
+              rules={{ required: { message: 'поле обязательно', value: true } }}
               size="small"
               type="text"
-              label="title"
-              placeholder="title"
+              label="http://"
             />
+            {/* <DropzoneBlock control={control} errors={errors} name="image" /> */}
+
           </div>
 
-          <div className={styles.categoryBlock}>
-            <h3>Категория</h3>
-            <Controller
-              rules={{ required: { value: true, message: "обязательно" } }}
-              control={control}
-              name="category"
-              render={({ field: { name, value, onChange } }) => (
-                <div className={styles.main}>
-                  <ReactSelect
-                    value={getValue(value)}
-                    options={categories}
-                    onChange={(newValue) => onChange((newValue as any).value)}
-                  />
+          <div className={styles.main__borderBottom}></div>
 
-                  <AnimatePresence>
-                    {errors[name] && (
-                      <motion.p
-                        className={styles.categoryBlock__errorText}
-                        initial={{ opacity: 0, y: "-100", height: 0 }}
-                        animate={{ opacity: 1, y: 0, height: "auto" }}
-                        exit={{ height: 0, y: "-100", opacity: 0 }}
-                      >
-                        {errors[name]?.message}
-                      </motion.p>
-                    )}
-                  </AnimatePresence>
-                </div>
-              )}
-            />
-          </div>
+          <Button type="submit" variant="contained" color="success">
+            SUBMIT
+          </Button>
+        </form>
+      </Container>
 
-          <CategoryBlock
-            errors={errors}
-            name="description"
-            register={register}
-            rules={{
-              required: {
-                value: true,
-                message: "поле обязательно",
-              },
-              minLength: { value: 2, message: "min - 2" },
-            }}
-            size="medium"
-            heading="Описание"
-            type="text"
-            label="title"
-            placeholder="title"
-            isMulti={4}
-          />
 
-          {/* <DropzoneBlock control={control} errors={errors} name="image" /> */}
-          <DropFileBlock />
-        </div>
+    </div>
 
-        <div className={styles.wrapper__borderBottom}></div>
-
-        <Button type="submit" variant="contained" color="success">
-          SUBMIT
-        </Button>
-      </form>
-    </Container>
   );
 };

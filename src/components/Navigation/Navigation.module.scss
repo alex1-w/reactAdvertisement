@@ -1,4 +1,8 @@
 .headerVariant {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+
     ul {
         display: flex;
         gap: 15px;
@@ -6,6 +10,8 @@
 
         li {
             transition: 0.3s scale;
+            color: black;
+            font-weight: 500;
 
             &:hover {
                 transition: 0.3s scale;
@@ -31,14 +37,19 @@
 
     @media screen and (max-width: 930px) {
         display: none;
-        // visibility: hidden;
+    }
+}
+
+.categoryBlock {
+    p {
+        font-size: 15px;
+        font-weight: 700;
     }
 }
 
 .burgerMenuVariant {
 
     ul {
-        // border: 1px solid red;
         height: fit-content;
         display: flex;
         align-items: flex-end;

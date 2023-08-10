@@ -1,73 +1,80 @@
 .main {
-    // border: 1px solid red;
-    display: grid;
-    grid-template-columns: 62% 38%;
-    padding-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
 }
 
 .leftPart {
+    width: fit-content;
     padding: 10px;
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 10px;
+    width: 45vw;
+    max-width: 800px;
 
     &__headBlock {
-        // border: 1px solid red;
         display: flex;
         flex-direction: column;
-        gap: 20px;
+        gap: 10px;
     }
 
     &__titleBlock {
-        // border: 1px solid red;
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: center;
+        gap: 30px;
 
         h4 {
             font-size: 24px;
         }
     }
 
-    &__title {
-        // border: 1px solid red;
-    }
-
-    &__price {
-        background-color: rgba(9, 214, 46, 0.703);
-        padding: 10px;
-        border-radius: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
     &__buttons {
+        width: fit-content;
+        align-self: center;
         display: flex;
-        // justify-content: space-around;
-        padding-left: 20px;
+        justify-content: space-between;
         gap: 20px;
+
+        @media screen and (max-width:1100px) {
+            flex-direction: column;
+            gap: 10px;
+        }
     }
 
     &__imageBlock {
         display: flex;
         align-items: center;
         background-color: rgba(0, 0, 0, 0.959);
+        max-width: 600px;
+        align-self: center;
 
         img {
-            // width: 100px;
             width: 100%;
             height: auto;
+            object-fit: contain;
         }
     }
 }
 
 .rightPart {
-    // border: 1px solid red;
     padding: 10px;
     display: flex;
     flex-direction: column;
     gap: 30px;
+    width: 44vw;
+    max-width: 700px;
+
+    &__price {
+        background-color: rgb(87, 211, 110);
+        padding: 12px 0;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        // width: fit-content;
+    }
 
     &__about {
         padding: 15px;
@@ -91,48 +98,47 @@
         display: flex;
         justify-content: center;
         gap: 20px;
+
+        @media screen and (max-width:970px) {
+            flex-direction: column;
+        }
     }
 }
+
 .likeBtn {
     color: red !important;
     border: 1px solid red !important;
 }
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-@media screen and (max-width: 1000px) {
-    .leftPart {
-        &__titleBlock {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 20px;
-        }
-        &__buttons{
-            padding: 0;
-        }
-    }
-
-    .rightPart {
-        &__buttons {
-        }
-    }
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////
-
-@media screen and (max-width:700px) {
+@media screen and (max-width:650px) {
     .main {
-        display: flex;
         flex-direction: column;
+        align-items: center;
     }
 
-    .rightPart {
-        // flex-direction: column-reverse;
-        flex-direction: column;
+    .leftPart {
+        width: 100%;
+        &__headBlock {}
 
-        &__buttons {
-            // margin: 0 auto;
-            // width: 300px;
+        &__titleBlock {}
+
+        &__buttons {}
+
+        &__imgBlock {
         }
+    }
+
+
+    .rightPart {
+
+        &__price {}
+
+        &__about {}
+
+        &__description {}
+
+        &__buttons {}
     }
 }

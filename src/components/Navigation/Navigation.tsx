@@ -22,7 +22,6 @@ interface INavProps {
 }
 
 export const Navigation: FC<INavProps> = ({ variant }) => {
-    // const currentLink = window.location.pathname
     const { isAuth } = useUserContext()
 
     const [isCategoryBlockShowed, setIsCategoryBlockShowed] = useState<boolean>(false)
@@ -56,21 +55,18 @@ export const Navigation: FC<INavProps> = ({ variant }) => {
                             </NavLink>
                         </li>
                         :
-                        <>
-                            {isAuth
-                                &&
-
-                                <li>
-                                    <NavLink
-                                        onClick={closeBurgerMenu}
-                                        to={item.link}
-                                        className={cn(window.location.pathname === item.link && styles.active)}
-                                    >
-                                        {item.name}
-                                    </NavLink>
-                                </li>
-
-                            }
+                        <>{isAuth
+                            &&
+                            <li>
+                                <NavLink
+                                    onClick={closeBurgerMenu}
+                                    to={item.link}
+                                    className={cn(window.location.pathname === item.link && styles.active)}
+                                >
+                                    {item.name}
+                                </NavLink>
+                            </li>
+                        }
                         </>
                     }
                 </Fragment>))}

@@ -4,14 +4,15 @@ import { Control, Controller, FieldErrors } from "react-hook-form";
 import Dropzone, { useDropzone } from "react-dropzone";
 import { FC } from "react";
 import { fileIcon } from "../../../data/categories.data";
-import { ICreateAdForm } from "../../../pages/CreateAd/CreateAd";
 import { useCallback } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { IAdvertisement } from "../../../services/advertisementService/advertisementservice.interface";
+
 
 interface IDropzoneBlock {
   name: "category" | "name" | "description" | "image";
-  errors: FieldErrors<ICreateAdForm>;
-  control: Control<ICreateAdForm>;
+  errors: FieldErrors<IAdvertisement>;
+  control: Control<IAdvertisement>;
 }
 
 export const DropzoneBlock: FC<IDropzoneBlock> = ({

@@ -14,6 +14,7 @@ interface ISelect {
     control: Control<ICreateAdForm>;
     options: ICategory[]
     // options: any
+    title: string;
 }
 
 // export interface IOptions {
@@ -21,7 +22,7 @@ interface ISelect {
 //     name: string;
 // }
 
-export const SelectBlock: FC<ISelect> = ({ control, errors, name, rules, options }) => {
+export const SelectBlock: FC<ISelect> = ({ control, errors, name, rules, options,title}) => {
     // console.log(options);
 
     const getValue = (value: string) => {
@@ -30,7 +31,7 @@ export const SelectBlock: FC<ISelect> = ({ control, errors, name, rules, options
 
     return (
         <div className={styles.categoryBlock}>
-            <h3>{name}</h3>
+            <h3>{title}</h3>
 
             <Controller
                 name={name}
@@ -39,7 +40,7 @@ export const SelectBlock: FC<ISelect> = ({ control, errors, name, rules, options
                 render={({ field: { name, value, onChange } }) => (
                     <div className={styles.categoryBlock__selectBlock}>
                         <ReactSelect
-                            placeholder='категория'
+                            // placeholder='категория'
                             options={options.map((item: ICategory) => {
                                 return ({
                                     value: String(item.id),

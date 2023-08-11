@@ -5,14 +5,12 @@ import { Container } from "../../components/Container/Container"
 import { Button } from '@mui/material'
 import { FC, useState } from 'react'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import { advertisements } from '../../data/advertisement.data'
-import { IAdvertisementResponse } from '../../services/advertisementService/advertisementservice.interface'
 import { useQuery } from 'react-query'
 import { advertisementService } from '../../services/advertisementService/advertisementService'
 
 export const Advertisement = () => {
     const { id } = useParams()
-    const advertisement = advertisements.find(ad => Number(ad.id) === Number(id))
+    // const advertisement = advertisements.find(ad => Number(ad.id) === Number(id))
 
     const { data, isLoading } = useQuery(
         ['getAdvertisement'],
@@ -22,9 +20,9 @@ export const Advertisement = () => {
     // console.log(data);
 
 
-    const advertisementNumber = advertisement?.phoneNumber
+    // const advertisementNumber = advertisement?.phoneNumber
     const [numberButtonVariant, setNumberButtonVariant] = useState<any>('УЗНАТЬ НОМЕР')
-    const showNumber = () => setNumberButtonVariant(advertisementNumber || 'номер не указан')
+    // const showNumber = () => setNumberButtonVariant(advertisementNumber || 'номер не указан')
 
     return (
         <Container>
@@ -85,7 +83,7 @@ export const Advertisement = () => {
                             type='button'
                             variant='contained'
                             color='secondary'
-                            onClick={showNumber}
+                            // onClick={showNumber}
                         >
                             {numberButtonVariant}
                         </Button>

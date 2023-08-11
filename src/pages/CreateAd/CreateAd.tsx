@@ -50,6 +50,7 @@ export const CreateAd = () => {
     ['categories-options'],
     () => categoryService.getCategories(),
   )
+  // console.log(data);
 
   const onSubmit = async (createAdForm: ICreateAdForm) => {
     console.log(createAdForm);
@@ -78,7 +79,6 @@ export const CreateAd = () => {
                 }}
                 size="small"
                 type="text"
-                label="title"
                 placeholder="title"
               />
             </div>
@@ -96,6 +96,7 @@ export const CreateAd = () => {
                     name="category"
                     options={data?.data}
                     rules={{}}
+                    title="Категория"
                   />
                 }</div>
             }

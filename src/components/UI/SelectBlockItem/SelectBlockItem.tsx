@@ -5,8 +5,8 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { Control, Controller, RegisterOptions, UseFormRegister } from 'react-hook-form';
-import { ICreateAdForm } from '../../../pages/CreateAd/CreateAd';
 import { ICategory } from '../../../types/ICategoryOption';
+import { IAdvertisement } from '../../../services/advertisementService/advertisementservice.interface';
 
 interface IOption {
     label: string;
@@ -19,7 +19,7 @@ interface ISelectBlockProps {
     rules: RegisterOptions;
     register: UseFormRegister<any>;
     options: any
-    control: Control<ICreateAdForm>;
+    control: Control<IAdvertisement>;
 }
 export const SelectBlockItem: FC<ISelectBlockProps> = ({ control, errors, name, options, register, rules }) => {
     const [selectValue, setSelectValue] = useState<any>()

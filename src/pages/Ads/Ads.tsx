@@ -8,6 +8,8 @@ import { advertisementService } from '../../services/advertisementService/advert
 import { Skeleton } from '../../components/UI/Skeleton/Skeleton'
 import { NotFoundComponent } from '../../components/NotFoundComponent/NotFoundComponent'
 import { categoryService } from '../../services/categoryService/categoryService'
+import { CategoryItem } from '../../components/CategoryItem/CategoryItem'
+import { ICategory } from '../../types/ICategoryOption'
 
 // const skeletons = Object.create(null)
 
@@ -47,8 +49,14 @@ export const Ads = () => {
                                 <NotFoundComponent />
                                 :
                                 <div className={styles.categoryBlock__categoriesGrid}>
-                                    {categoriesData?.data?.map((category: any) => (
-                                        <CategoriesItem category={category} key={category.id} />
+                                    {categoriesData?.data?.map((category: ICategory) => (
+                                        // <CategoriesItem category={category} key={category.id} />
+                                        <CategoryItem
+                                            description={category.description}
+                                            id={category.id}
+                                            image={category.image}
+                                            name={category.name}
+                                        />
                                     ))}
                                 </div>
                             }

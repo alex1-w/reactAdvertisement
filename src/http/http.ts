@@ -3,8 +3,8 @@ import axios, { AxiosRequestConfig, AxiosRequestHeaders } from "axios";
 import cookies from 'js-cookie'
 
 export const http = axios.create({
-    baseURL: 'http://localhost:5000/api',
-    withCredentials: true
+    withCredentials: true,
+    baseURL: 'http://localhost:5000/api'
 })
 
 export const updateHeaders = () => {
@@ -16,6 +16,16 @@ export const updateHeaders = () => {
         return config
     })
 }
+
+// http.interceptors.request.use((config: AdaptAxiosRequestConfig) => {
+//     const token = cookies.get('userToken')
+//     // if (token) {
+//     //     config.headers!['Authorization'] = `Bearer ${token}`
+//     // }
+//     config.headers!.Authorization = `Bearer ${token}`
+//     return config
+// })
+
 
 updateHeaders()
 

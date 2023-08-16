@@ -1,34 +1,27 @@
 //@ts-ignore
 import styles from "./SelectBlock.module.scss";
 import { Control, Controller, RegisterOptions } from "react-hook-form"
-import { ICreateAdForm } from "../../../pages/CreateAd/CreateAd";
 import { FC } from "react";
 import ReactSelect from "react-select";
 import { AnimatePresence, motion } from "framer-motion";
 import { ICategory } from "../../../types/ICategoryOption";
 
 interface ISelect {
-    name: any
+    name: string
     errors: any;
     rules: RegisterOptions;
-    control: Control<ICreateAdForm>;
+    // control: Control<ICreateAdForm>;
+    control: Control<any>;
     options: ICategory[]
-    // options: any
     title: string;
 }
 
-// export interface IOptions {
-//     label: string;
-//     name: string;
-// }
-
-export const SelectBlock: FC<ISelect> = ({ control, errors, name, rules, options,title}) => {
-    // console.log(options);
+export const SelectBlock: FC<ISelect> = ({ control, errors, name, rules, options, title }) => {
 
     const getValue = (value: string) => {
         return value ? options.find((option: ICategory) => option.name === value) : "";
     }
-
+    
     return (
         <div className={styles.categoryBlock}>
             <h3>{title}</h3>
@@ -44,6 +37,7 @@ export const SelectBlock: FC<ISelect> = ({ control, errors, name, rules, options
                             options={options.map((item: ICategory) => {
                                 return ({
                                     value: String(item.id),
+                                    // value: item.id,
                                     label: item.name
                                 } as any)
                             })}

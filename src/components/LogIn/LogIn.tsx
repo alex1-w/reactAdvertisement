@@ -12,6 +12,7 @@ import { IUserService } from "../../services/userService/IUserService";
 import Cookies from "js-cookie";
 import { useModalContext } from "../UI/ModalProvider/ModalProvider";
 import { useUserContext } from "../../providers/UserProvider";
+import { AxiosError } from "axios";
 
 export const LogIn = () => {
   const { closeModal } = useModalContext()
@@ -27,7 +28,6 @@ export const LogIn = () => {
     },
   });
 
-
   const { mutateAsync } = useMutation(
     ["authenticate"],
     (body: IUserService) => userService.authenticate(body),
@@ -40,8 +40,8 @@ export const LogIn = () => {
         enqueueSnackbar("успешно", { variant: "success" });
         closeModal()
       },
-      onError: () => {
-        enqueueSnackbar("ошибка", { variant: "error" });
+      onError: (error: AxiosError<{ message: string }>) => {
+        enqueueSnackbar(`${error?.response?.data.message}`, { variant: "error" });
       },
     }
   );

@@ -1,0 +1,67 @@
+.main {
+    background: var(--primary-bg);
+    width: 100%;
+    min-height: 100vh;
+}
+
+
+.inputBlock {
+    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 1.33fr;
+    background-color: #8458B3;
+    border-radius: 5px;
+    padding: 20px 10px;
+
+    input {
+        background-color: white;
+    }
+
+
+    @media screen and (max-width: 700px) {
+        grid-template-columns: 1fr 2fr;
+    }
+
+    @media screen and (max-width: 560px) {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px 30px;
+    }
+}
+
+.formBlock {
+    // gap: 30px;
+    background-color: black;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 70vw;
+    width: 800px;
+    padding: 40px 70px;
+    // background-color: rgb(93, 93, 186);
+    background-color: #494D5F;
+    border-radius: 20px;
+
+    &__borderBottom {
+        margin: 10px auto;
+        width: 93%;
+        border-bottom: 3px solid rgba(0, 0, 0, 0.37);
+    }
+
+    h1 {
+        color: var(--light);
+    }
+
+    button {
+        margin: 0 auto;
+        width: 70%;
+    }
+}
+
+.adsBlock{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}

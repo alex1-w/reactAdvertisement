@@ -23,8 +23,10 @@ export const Header = () => {
 
                 <div className={styles.userInteractBlock}>
                     {isAuth && <UserMenu />}
-                    <ProfileBtn />
-                    <div className={styles.userInteractBlock__burgerMenu}>  <BurgerMenu /></div>
+                    {!isAuth && <ProfileBtn />}
+                    <div className={styles.userInteractBlock__burgerMenu}>
+                        <BurgerMenu />
+                    </div>
                 </div>
 
             </div>

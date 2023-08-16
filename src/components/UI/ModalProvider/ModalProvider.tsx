@@ -25,11 +25,15 @@ export const useModalContext = () => {
 }
 
 export const ModalProvider: FC<IModalProvider> = ({ children }) => {
-
     const [isModalOpened, seIsModalOpened] = useState<boolean>(false)
-    const openModal = () => { seIsModalOpened(true) }
-    const closeModal = () => { seIsModalOpened(false) }
     const [content, setContent] = useState<ReactNode | null>(null)
+
+    const openModal = () => { seIsModalOpened(true) }
+
+    const closeModal = () => {
+        setContent(null)
+        seIsModalOpened(false)
+    }
 
     const handleModal = (children: ReactNode) => {
         openModal()

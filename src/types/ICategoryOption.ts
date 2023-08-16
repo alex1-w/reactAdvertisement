@@ -7,5 +7,6 @@ export interface ICategory {
 
 export interface IOptions {
     label: string;
-    value: string;
+    // value: string;
+    value: number;
 }

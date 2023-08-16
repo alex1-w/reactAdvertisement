@@ -1,0 +1,21 @@
+.main {
+
+    >li {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        padding: 3px 5px;
+        border-radius: 8px;
+        transition: background-color 0.3s;
+
+        svg {
+            fill: white;
+            height: 1em;
+        }
+
+        &:hover {
+            transition: background-color 0.3s;
+            background-color: rgb(69, 69, 69);
+        }
+    }
+}

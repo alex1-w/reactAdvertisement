@@ -39,12 +39,7 @@ export const CategoryPage: FC = () => {
             <div className={styles.wrapper}>
 
                 <div className={styles.main}>
-
-                    <motion.div
-                        className={styles.top}
-                    // initial={{ maxHeight: 350 }}
-                    // animate={{ maxHeight: 'auto' }}
-                    >
+                    <div className={styles.top}>
                         {categoryLoading ? <p>loading</p>
                             :
                             <>
@@ -52,48 +47,41 @@ export const CategoryPage: FC = () => {
                                     &&
                                     <>
                                         <div className={styles.top__head}>
-                                            <div className={styles.top__name}>
-                                                <h1>{categoryData?.data.name}</h1>
-                                            </div>
+
+                                            <h1>{categoryData?.data.name}</h1>
+
                                             <div className={styles.top__imgBlock}>
                                                 <img src={categoryData?.data.image} alt={categoryData?.data.name} />
                                             </div>
+                                            
                                         </div>
                                         <div className={styles.top__description}>
                                             <p>{categoryData?.data.description}</p>
                                         </div>
-                                    </>
-                                }
-                            </>
-                        }
+                                    </>}
+                            </>}
+                    </div>
+                </div>
 
-                    </motion.div>
-                </div >
-
-                {
-                    isLoading
-                        ?
-                        <div className={styles.advertisementsBlock
-                        } >
-                            <Skeleton />
-                        </div >
-                        :
-                        <>
-                            {
-                                !categoryAdvertisements?.data.length
-                                    ?
-                                    <NotFoundComponent />
-                                    :
-                                    <Container>
-                                        <div className={styles.advertisementsBlock}>
-                                            {categoryAdvertisements?.data.map(item => (
-                                                <AdvertisementItem advertisement={item} key={item.id} />
-                                            ))}
-                                        </div>
-                                    </Container>
-                            }
-                        </>
-                }
+                {isLoading
+                    ?
+                    <div className={styles.advertisementsBlock}>
+                        <Skeleton />
+                    </div >
+                    :
+                    <>
+                        {!categoryAdvertisements?.data.length
+                            ?
+                            <NotFoundComponent />
+                            :
+                            <Container>
+                                <div className={styles.advertisementsBlock}>
+                                    {categoryAdvertisements?.data.map(item => (
+                                        <AdvertisementItem advertisement={item} key={item.id} />
+                                    ))}
+                                </div>
+                            </Container>}
+                    </>}
             </div >
         </>
     )

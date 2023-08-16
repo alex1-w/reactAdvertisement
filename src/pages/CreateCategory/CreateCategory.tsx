@@ -17,7 +17,6 @@ export const CreateCategory = () => {
             description: '',
             image: ''
         },
-
     })
 
     const { mutateAsync, isLoading } = useMutation(

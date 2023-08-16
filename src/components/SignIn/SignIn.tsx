@@ -13,8 +13,10 @@ import { InputBlock } from "../UI/InputBlock/InputBlock";
 import { fieldNameCheck } from "../../helpers/validateHelpers";
 import { ISignForm } from "../../types/ISignForm";
 import { useAuthenticationWrapperContext } from "../../providers/Authentication";
+import { useModalContext } from "../UI/ModalProvider/ModalProvider";
 
 export const SignIn = () => {
+  const { closeModal } = useModalContext()
   const { changeWrapper } = useAuthenticationWrapperContext()
   const { register, handleSubmit, setError, formState: { errors, isValid, submitCount } } = useForm(
     {
@@ -27,27 +29,19 @@ export const SignIn = () => {
       },
     });
 
-  // const [loading, setLoading] = useState(true);
-  // function handleClick() {
-  //   setLoading(true);
-  // }
-
-  const { isLoading, mutateAsync, isSuccess } =
-    useMutation(
-      ["signIn"],
-      (body: IUserService) => userService.registration(body),
-      {
-        onSuccess: (data) => {
-          enqueueSnackbar("вы успешно запегистрированы", { variant: "success" });
-          changeWrapper('login')
-        },
-        onError: (error: AxiosError<{ message: string }>) => {
-          console.log(error);
-          enqueueSnackbar(`${error.response?.data?.message}`, { variant: "error" });
-        },
-      }
-    );
-  console.log(errors);
+  const { isLoading, mutateAsync } = useMutation(
+    ["signIn"],
+    (body: IUserService) => userService.registration(body),
+    {
+      onSuccess: (data) => {
+        enqueueSnackbar("вы успешно запегистрированы", { variant: "success" });
+        changeWrapper('login')
+      },
+      onError: (error: AxiosError<{ message: string }>) => {
+        enqueueSnackbar(`${error.response?.data?.message}`, { variant: "error" });
+      },
+    }
+  );
 
   const onSubmit = async (formData: ISignForm) => {
     console.log(formData);

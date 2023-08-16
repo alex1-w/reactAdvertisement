@@ -10,15 +10,11 @@ import { advertisementService } from '../../services/advertisementService/advert
 
 export const Advertisement = () => {
     const { id } = useParams()
-    // const advertisement = advertisements.find(ad => Number(ad.id) === Number(id))
 
     const { data, isLoading } = useQuery(
         ['getAdvertisement'],
         () => advertisementService.getAdvertisement(String(id)),
     )
-
-    // console.log(data);
-
 
     // const advertisementNumber = advertisement?.phoneNumber
     const [numberButtonVariant, setNumberButtonVariant] = useState<any>('УЗНАТЬ НОМЕР')

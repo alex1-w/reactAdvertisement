@@ -10,21 +10,15 @@ import { InputBlock } from "../../components/UI/InputBlock/InputBlock";
 import { enqueueSnackbar } from "notistack";
 import { SelectBlock } from "../../components/UI/SelectBlock/SelectBlock";
 import { categoryService } from "../../services/categoryService/categoryService";
-
-export interface ICreateAdForm {
-  category: string;
-  name: string;
-  description: string;
-  image: string;
-}
+import { IAdvertisement } from "../../services/advertisementService/advertisementservice.interface";
 
 export const CreateAd = () => {
-  const { register, handleSubmit, control, formState: { isValid, errors }, watch, reset } = useForm(
+  const { register, handleSubmit, control, formState: { isValid, errors }, watch, reset } = useForm<IAdvertisement>(
     {
       mode: "onBlur",
       reValidateMode: "onChange",
       defaultValues: {
-        category: "",
+        categoryId: '',
         name: "",
         description: "",
         image: "",
@@ -33,7 +27,7 @@ export const CreateAd = () => {
 
   const { mutateAsync } = useMutation(
     ["createAdvertisement"],
-    (createAdForm: ICreateAdForm) =>
+    (createAdForm: IAdvertisement) =>
       advertisementService.createAdvertisement(createAdForm),
     {
       onError: (error) => {
@@ -50,9 +44,8 @@ export const CreateAd = () => {
     ['categories-options'],
     () => categoryService.getCategories(),
   )
-  // console.log(data);
 
-  const onSubmit = async (createAdForm: ICreateAdForm) => {
+  const onSubmit = async (createAdForm: IAdvertisement) => {
     console.log(createAdForm);
     mutateAsync(createAdForm)
     reset()
@@ -83,23 +76,23 @@ export const CreateAd = () => {
               />
             </div>
 
-            {
-              isLoading
-                ?
-                <p>loadiong</p>
-                :
-                <div className={styles.selectBlock}>{
-                  data?.data &&
-                  <SelectBlock
-                    control={control}
-                    errors={errors}
-                    name="category"
-                    options={data?.data}
-                    rules={{}}
-                    title="Категория"
-                  />
-                }</div>
-            }
+            {isLoading
+              ?
+              <p>loadiong</p>
+              :
+              <div className={styles.selectBlock}>{
+                data?.data
+                &&
+                <SelectBlock
+                  control={control}
+                  errors={errors}
+                  name="category"
+                  options={data?.data}
+                  rules={{}}
+                  title="Категория"
+                />}
+
+              </div>}
 
             <CategoryBlock
               errors={errors?.description?.message}

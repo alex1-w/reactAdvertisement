@@ -9,13 +9,10 @@ import { InputSearch } from '../InputSearch/InputSearch';
 import { useMenuProvider } from '../../../providers/MenuProvider';
 
 export const BurgerMenu = () => {
-    const { closeMenu, isMenuOpened, openMenu, menuHandler } = useMenuProvider()
+    const { isMenuOpened, menuHandler } = useMenuProvider()
     const burgerMenuRef = useRef<HTMLDivElement>(null)
 
-    const changeMenu = () => {
-        // burgerMenuRef.current?.classList.toggle(styles.opened)
-        menuHandler()
-    }
+    const changeMenu = () => { menuHandler() }
 
     useEffect(() => {
         if (isMenuOpened === true) {
@@ -27,8 +24,12 @@ export const BurgerMenu = () => {
     }, [isMenuOpened])
 
     return (
-        <>
-            <div className={styles.main} onClick={changeMenu} ref={burgerMenuRef} >
+        <div className={styles.main}>
+            <div
+                className={styles.burger}
+                onClick={changeMenu}
+                ref={burgerMenuRef}
+            >
                 <span></span>
                 <span></span>
                 <span></span>
@@ -42,6 +43,6 @@ export const BurgerMenu = () => {
                     <ThemeButton />
                 </DrawerMenu>
             }
-        </>
+        </div>
     )
 }

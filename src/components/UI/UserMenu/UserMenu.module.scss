@@ -1,8 +1,82 @@
-.main {}
+.main {
+    position: relative;
+}
 
 .iconBlock {
     cursor: pointer;
-    border: 1px solid gray;
-    border-radius: 5px;
-    padding: 7px 5px;
+    border: 2px solid rgb(89, 89, 89);
+    // border-radius: 15px;
+    border-radius: 50%;
+    width: 44px;
+    padding: 8px 7px;
+    transition: 0.3s all;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+
+    &.menuIsActive {
+        transition: 0.3s all;
+        box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.619);
+    }
+}
+
+.menu {
+    position: absolute;
+    top: 100%;
+    right: -20%;
+    z-index: 20;
+    padding: 5px;
+
+    &__wrapper {
+        cursor: pointer;
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
+        width: 210px;
+        // height: 250px;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.338);
+        background-color: rgb(48, 48, 48);
+        // border: 1px solid red;
+
+        ul {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+
+            li {
+                padding: 3px 5px;
+                border-radius: 8px;
+                transition: background-color 0.3s;
+            }
+        }
+    }
+
+    &__line {
+        height: 3px;
+        width: 95%;
+        border-radius: 20px;
+        background-color: gray;
+    }
+
+    &__exitBtn {
+        &__name {
+            color: rgb(207, 4, 4) !important;
+        }
+
+        padding: 3px 5px;
+        border-radius: 8px;
+        transition: background-color 0.3s;
+
+        &:hover {
+            transition: background-color 0.3s;
+            background-color: rgb(56, 56, 56);
+        }
+    }
+
+    p {
+        color: var(--light);
+    }
+
 }

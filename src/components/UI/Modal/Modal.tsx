@@ -26,7 +26,6 @@ export const Modal: FC = () => {
                             <div className={styles.modalContent__cancelIcon} onClick={closeModal}>
                                 {cancelIcon}
                             </div>
-
                             {content}
                         </div>
 

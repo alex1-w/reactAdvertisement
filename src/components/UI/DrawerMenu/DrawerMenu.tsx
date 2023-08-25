@@ -1,13 +1,16 @@
 //@ts-ignore
 import styles from './DrawerMenu.module.scss';
 import { motion } from 'framer-motion';
-import { FC } from 'react';
+import { FC, useRef } from 'react';
+import { useOnClickOutside } from '../../../hooks/useClickOutside';
 
 interface IDrawerMenuProps {
     children: React.ReactNode
 }
 
 export const DrawerMenu: FC<IDrawerMenuProps> = ({ children }) => {
+
+
     return (
         <motion.div
             className={styles.main}
@@ -19,6 +22,5 @@ export const DrawerMenu: FC<IDrawerMenuProps> = ({ children }) => {
                 {children}
             </div>
         </motion.div>
-
     )
 }

@@ -1,10 +1,10 @@
 // @ts-ignore
 import styles from './ChangePasswordComponent.module.scss';
-import { InputBlock } from '../../../components/UI/InputBlock/InputBlock';
+import { InputBlock } from '../../../../components/UI/InputBlock/InputBlock';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Button } from "@mui/material";
 import { useMutation, useQuery } from 'react-query';
-import { userService } from '../../../services/userService/userService';
+import { userService } from '../../../../services/userService/userService';
 import { enqueueSnackbar } from 'notistack';
 import { AxiosError } from 'axios';
 

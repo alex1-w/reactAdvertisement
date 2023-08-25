@@ -1,5 +1,5 @@
 .wrapper {
-  background-image: url("https://avatars.mds.yandex.net/get-altay/979642/2a00000184cdbb0235e23f5d56f69fb3e19c/XXL_height");
+  min-height: 100vh;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -41,7 +41,7 @@
   align-items: center;
   display: grid;
   grid-template-columns: 1fr 1.33fr;
-  background-color: #8458B3;  
+  background-color: #8458B3;
   border-radius: 5px;
   padding: 20px 10px;
 

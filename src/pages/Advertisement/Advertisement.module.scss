@@ -1,3 +1,8 @@
+.wrapper{
+    min-width: 100vh;
+    min-height: 100vw;
+}
+
 .main {
     display: flex;
     justify-content: center;
@@ -5,6 +10,8 @@
 }
 
 .leftPart {
+    // border: 1px solid red;
+
     width: fit-content;
     padding: 10px;
     display: flex;
@@ -59,15 +66,19 @@
 }
 
 .rightPart {
-    padding: 10px;
+    // border: 1px solid red;
+    // border: #85DCBE 1px solid;
+    background-color: #E9F1FA;
+    padding: 50px 10px;
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 10px;
     width: 44vw;
     max-width: 700px;
 
+
     &__price {
-        background-color: rgb(87, 211, 110);
+        background-color: #E27D60;
         padding: 12px 0;
         border-radius: 10px;
         display: flex;
@@ -82,16 +93,32 @@
         flex-direction: column;
         gap: 8px;
         border-radius: 10px;
-        background-color: rgba(4, 4, 128, 0.116);
+        background-color: #85DCBE;
+
+        &__categoryBlock {
+            display: flex;
+            align-items: flex-end;
+            gap: 10px;
+        }
     }
 
     &__description {
         border-radius: 10px;
         padding: 15px 10px;
-        background-color: rgba(128, 128, 128, 0.228);
+        background-color: #E8A87C;
         max-height: 700px;
         overflow: hidden;
         word-break: normal;
+    }
+
+    &__dateBlock {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        border-radius: 10px;
+        padding: 15px 10px;
+        background-color: #C38D9E;
+        max-height: 700px;
     }
 
     &__buttons {
@@ -120,14 +147,14 @@
 
     .leftPart {
         width: 100%;
+
         &__headBlock {}
 
         &__titleBlock {}
 
         &__buttons {}
 
-        &__imgBlock {
-        }
+        &__imgBlock {}
     }
 
 

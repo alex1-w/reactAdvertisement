@@ -11,14 +11,19 @@ import { enqueueSnackbar } from "notistack";
 import { SelectBlock } from "../../components/UI/SelectBlock/SelectBlock";
 import { categoryService } from "../../services/categoryService/categoryService";
 import { IAdvertisement } from "../../services/advertisementService/advertisementservice.interface";
+import { AxiosError } from "axios";
+import { useNavigate } from "react-router-dom";
 
 export const CreateAd = () => {
+  const navigate = useNavigate()
+
   const { register, handleSubmit, control, formState: { isValid, errors }, watch, reset } = useForm<IAdvertisement>(
     {
       mode: "onBlur",
       reValidateMode: "onChange",
       defaultValues: {
-        categoryId: '',
+        // categoryId: '',
+        categoryId: 0,
         name: "",
         description: "",
         image: "",
@@ -30,11 +35,11 @@ export const CreateAd = () => {
     (createAdForm: IAdvertisement) =>
       advertisementService.createAdvertisement(createAdForm),
     {
-      onError: (error) => {
-        enqueueSnackbar("ошибка", { variant: "error" });
+      onError: (error: AxiosError<{ message: string }>) => {
+        enqueueSnackbar(`${error?.response?.data.message}`, { variant: "error" });
       },
       onSuccess: (data, body, context) => {
-        console.log(data, body, context);
+        // console.log(data, body, context);
         enqueueSnackbar("объявление добавлено", { variant: "success" });
       },
     }
@@ -49,6 +54,7 @@ export const CreateAd = () => {
     console.log(createAdForm);
     mutateAsync(createAdForm)
     reset()
+    // navigate('')
   };
 
   return (
@@ -85,8 +91,8 @@ export const CreateAd = () => {
                 &&
                 <SelectBlock
                   control={control}
-                  errors={errors}
-                  name="category"
+                  errors={errors?.categoryId?.message}
+                  name="categoryId"
                   options={data?.data}
                   rules={{}}
                   title="Категория"
@@ -118,9 +124,7 @@ export const CreateAd = () => {
               rules={{ required: { message: 'поле обязательно', value: true } }}
               size="small"
               type="text"
-              label="http://"
             />
-            {/* <DropzoneBlock control={control} errors={errors} name="image" /> */}
 
           </div>
 

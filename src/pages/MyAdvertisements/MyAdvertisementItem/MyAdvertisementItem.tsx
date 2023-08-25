@@ -1,12 +1,27 @@
 // @ts-ignore
 import styles from './MyAdvertisementItem.module.scss'
 import { IAdvertisementResponse } from '../../../services/advertisementService/advertisementservice.interface'
-import { editIcon, eyeIcon } from '../../../data/categories.data'
-import { FC } from 'react'
+import { editIcon, eyeIcon, trashIcon } from '../../../data/svgIcons'
+import { FC, useRef } from 'react'
 import { Link } from 'react-router-dom'
+import { useMutation } from 'react-query'
+import { advertisementService } from '../../../services/advertisementService/advertisementService'
+import { useOnClickOutside } from '../../../hooks/useClickOutside'
 
 export const MyAdvertisementItem: FC<IAdvertisementResponse> = ({ categoryId, description, image, name, id }) => {
+    const deleteBlockRef = useRef<HTMLButtonElement>(null)
+    const deleteBtnRef = useRef<HTMLDivElement>(null)
 
+    const { mutateAsync } = useMutation(
+        ['deleteAdvertisement'],
+        (id: string) => advertisementService.deleteAdvertisement(String(id))
+    )
+
+    const showDeleteBtn = () => deleteBlockRef?.current?.classList.toggle(styles.active)
+    const deleteAdvertisement = (id: string) => { mutateAsync(id) }
+
+    const hideDeleteBtn = () => deleteBlockRef?.current?.classList.remove(styles.active)
+    useOnClickOutside(deleteBtnRef, hideDeleteBtn)
 
     return (
         <div className={styles.main}>
@@ -34,8 +49,30 @@ export const MyAdvertisementItem: FC<IAdvertisementResponse> = ({ categoryId, de
                     {editIcon}
                 </Link>
 
+                <div
+                    ref={deleteBtnRef}
+
+                    className={styles.deleteBlock}>
+
+                    <div
+                        className={styles.deleteBlock__trash}
+                        onClick={showDeleteBtn}
+                    >
+                        {trashIcon}
+                    </div>
+
+                    <button
+                        ref={deleteBlockRef}
+                        onClick={() => deleteAdvertisement(String(id))}
+                        className={styles.deleteBlock__btn}
+                    >
+                        <p>точно удалить?</p>
+                    </button>
+
+                </div>
+
                 {eyeIcon}
-                
+
             </div>
 
         </div>

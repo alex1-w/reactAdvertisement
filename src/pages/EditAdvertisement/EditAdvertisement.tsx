@@ -1,7 +1,7 @@
 // @ts-ignore
 import styles from './EditAdvertisement.module.scss'
 import { useMutation, useQuery } from "react-query"
-import { useNavigate, useParams } from "react-router-dom"
+import { useLocation, useNavigate, useParams } from "react-router-dom"
 import { advertisementService } from "../../services/advertisementService/advertisementService"
 import { useForm } from 'react-hook-form'
 import { IAdvertisement } from '../../services/advertisementService/advertisementservice.interface'
@@ -9,19 +9,24 @@ import { CategoryBlock } from '../CreateAd/CategoryBlock/CategoryBlock'
 import { SelectBlock } from '../../components/UI/SelectBlock/SelectBlock'
 import { InputBlock } from '../../components/UI/InputBlock/InputBlock'
 import { Button } from "@mui/material";
-import { categoryService } from '../../services/categoryService/categoryService'
 import { enqueueSnackbar } from 'notistack'
 import { AxiosError } from 'axios'
+import { useCategories } from '../../hooks/useCategories'
+import { useEffect, useState } from 'react'
+import { Helmet } from 'react-helmet'
 
 export const EditAdvertisement = () => {
+    const location = useLocation()
     const navigate = useNavigate()
     const { id } = useParams()
+
     const { register, handleSubmit, control, formState: { isValid, errors }, setValue } = useForm<IAdvertisement>(
         {
             mode: "onBlur",
             reValidateMode: "onChange",
             defaultValues: {
-                categoryId: "",
+                // categoryId: "",
+                categoryId: 0,
                 name: "",
                 description: "",
                 image: "",
@@ -29,21 +34,23 @@ export const EditAdvertisement = () => {
         }
     );
 
-    const { data: categoryOptions, isLoading: categoryOptionsLoading } = useQuery(
-        ['categories-options'],
-        () => categoryService.getCategories(),
-    )
+    const { data: categories, isLoading: isCategoryLoading } = useCategories()
 
-    const { isLoading } = useQuery(
+    const { data, isLoading } = useQuery(
         ['getAdvertisement'],
-        () => advertisementService.getAdvertisement(String(id)),
+        () => advertisementService.getAdvertisement(String(id), true),
         {
             onSuccess: (data) => {
+                if (data.data === null) navigate('/not-found')
                 setValue('name', data.data.name)
                 setValue('categoryId', data.data.categoryId)
                 setValue('description', data.data.description)
                 setValue('image', data.data.image)
-            }
+            },
+            onError: () => {
+                navigate('/not-found')
+            },
+            retry: false
         }
     )
 
@@ -61,10 +68,12 @@ export const EditAdvertisement = () => {
         }
     )
 
+
+
     const onSubmit = (editBody: IAdvertisement) => {
-        console.log(editBody);
-        
         mutateAsync(editBody)
+        // console.log(editBody);
+
     }
 
     return (
@@ -91,19 +100,20 @@ export const EditAdvertisement = () => {
                         />
                     </div>
 
-                    {categoryOptionsLoading
+                    {isCategoryLoading
                         ?
-                        <p>loadiong</p>
+                        <>loading</>
                         :
                         <div className={styles.selectBlock}>{
-                            categoryOptions?.data &&
+                            categories?.data &&
                             <SelectBlock
                                 control={control}
-                                errors={errors}
+                                errors={errors?.categoryId?.message}
                                 name="categoryId"
-                                options={categoryOptions!.data}
+                                options={categories!.data}
                                 rules={{ required: { value: true, message: "поле обязательно" } }}
                                 title="Категория"
+                                register={register}
                             />}
                         </div>
                     }
@@ -119,7 +129,6 @@ export const EditAdvertisement = () => {
                         size="medium"
                         heading="Описание"
                         type="text"
-                        // label="title"
                         placeholder="title"
                         isMulti={4}
                     />
@@ -132,7 +141,6 @@ export const EditAdvertisement = () => {
                         rules={{ required: { message: 'поле обязательно', value: true } }}
                         size="small"
                         type="text"
-                        label="http://"
                     />
 
                 </div>

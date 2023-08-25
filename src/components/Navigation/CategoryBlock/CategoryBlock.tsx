@@ -28,7 +28,11 @@ export const CategoryBlock = () => {
                         <div className={styles.categoryBlock}>
 
                             {data?.data.map(item => (
-                                <Link to={`/category-page/${item.id}`} className={styles.categoryItem} key={item.id}>
+                                <Link
+                                    to={`/category-page/${item.id}`}
+                                    className={styles.categoryItem}
+                                    key={item.id}
+                                >
                                     <p>{item.name}</p>
                                     {arrowIcon}
                                 </Link>

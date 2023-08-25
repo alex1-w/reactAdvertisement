@@ -78,56 +78,6 @@ export const Navigation: FC<INavProps> = ({ variant }) => {
                 <p>Category</p>
                 {isCategoryBlockShowed && <CategoryBlock />}
             </div>
-        </nav >
+        </nav>
     )
 }
-
-
-{/* {!isAuth &&
-                <>
-                    <ul className={styles.links}>
-                        {guestsLinks.map(link => (
-                            <li key={link.name} >
-                                <NavLink
-                                    onClick={closeBurgerMenu}
-                                    to={link.link}
-                                    className={cn(window.location.pathname === link.link && styles.active)}
-                                >
-                                    {link.name}
-                                </NavLink>
-                            </li>
-                        ))}
-                        <li
-                            onMouseLeave={() => { setIsCategoryBlockShowed(false) }}
-                            onMouseEnter={() => { setIsCategoryBlockShowed(true) }}>
-                            Category
-                            {isCategoryBlockShowed && <CategoryBlock />}
-                        </li>
-                    </ul>
-                </>
-            }
-            
-            {isAuth &&
-                <>
-                    <ul className={styles.links}>
-                        {authenticatedUsersLinks.slice(0, 3).map(link => (
-                            <li key={link.name} >
-                                <NavLink
-                                    onClick={closeBurgerMenu}
-                                    to={link.link}
-                                    className={cn(window.location.pathname === link.link && styles.active)}
-                                >
-                                    {link.name}
-                                </NavLink>
-                            </li>
-                        ))}
-                        <li
-                            onMouseLeave={() => { setIsCategoryBlockShowed(false) }}
-                            onMouseEnter={() => { setIsCategoryBlockShowed(true) }}
-                        >
-                            <p>Category</p>
-                            {isCategoryBlockShowed && <CategoryBlock />}
-                        </li>
-                    </ul>
-                </>
-            } */}

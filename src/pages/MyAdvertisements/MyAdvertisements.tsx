@@ -7,6 +7,8 @@ import { Skeleton } from '../../components/UI/Skeleton/Skeleton'
 import { MyAdvertisementItem } from './MyAdvertisementItem/MyAdvertisementItem'
 import { IAdvertisementResponse } from '../../services/advertisementService/advertisementservice.interface'
 
+// const skeletons = Object.create()
+
 export const MyAdvertisements = () => {
     const navigate = useNavigate()
 

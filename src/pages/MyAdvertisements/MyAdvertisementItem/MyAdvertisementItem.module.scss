@@ -6,6 +6,9 @@
     overflow: hidden;
     align-items: center;
     gap: 10px;
+    background-color: var(--light);
+    padding: 0 10px;
+    border-radius: 3px;
 }
 
 .imgBlock {
@@ -31,13 +34,13 @@
     padding: 27px 0;
 
     h3 {
-        color: var(--light);
+        color: black !important;
     }
 
     &__description {
 
         p {
-            color: var(--light);
+            // color: var(--light);
             text-align: center;
             -webkit-line-clamp: 5;
             display: -webkit-box;
@@ -67,6 +70,45 @@
         &:hover {
             transition: scale 0.2s;
             scale: 1.2;
+        }
+    }
+}
+
+.deleteBlock {
+    position: relative;
+    z-index: 100;
+
+    &__trash {
+        cursor: pointer;
+        transition: scale 0.2s;
+
+        &:hover {
+            transition: scale 0.2s;
+            scale: 1.2;
+        }
+    }
+
+    &__btn {
+        background-color: rgb(255, 79, 79);
+        padding: 6px 9px;
+        position: absolute;
+        border-radius: 5px;
+        border: 2px solid red;
+        top: -40%;
+        right: 150%;
+        // top: 100%;
+        // left: 10px;
+        z-index: 100;
+        display: none;
+
+        p {
+            font-weight: 600;
+            // color: rgb(198, 0, 0);
+            color: white;
+        }
+
+        &.active {
+            display: block;
         }
     }
 }

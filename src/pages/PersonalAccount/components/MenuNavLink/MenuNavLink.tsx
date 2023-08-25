@@ -1,0 +1,37 @@
+// @ts-ignore
+import styles from './MenuNavLink.module.scss';
+import { FC, useEffect, useRef, useState } from 'react';
+
+interface IMenuNavLink {
+    name: string;
+    value: string;
+    setNewContent: (content: string) => void;
+    // content: string
+}
+
+export const MenuNavLink: FC<IMenuNavLink> = ({ name, setNewContent, value }) => {
+    // const [linkActive, setLinkActive] = useState<boolean>(false)
+    // const linkRef = useRef<HTMLDivElement>(null)
+
+    // useEffect(() => {
+
+    //     if (linkActive) linkRef?.current?.classList.add(styles.active)
+    //     if (!linkActive) linkRef?.current?.classList.remove(styles.active)
+
+    // }, [linkActive])
+
+    return (
+        <>
+            <div
+                // ref={linkRef}
+                // key={name}
+                className={styles.link}
+                onClick={() => {
+                    setNewContent(value)
+                }}
+            >
+                <p>{name}</p>
+            </div>
+        </>
+    )
+}

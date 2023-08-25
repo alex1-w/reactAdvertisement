@@ -1,14 +1,14 @@
 // @ts-ignore
 import styles from './PersonalAccount.module.scss';
-import { profileIcon } from '../../data/categories.data';
+import { profileIcon } from '../../data/svgIcons';
 import { Container } from '../../components/Container/Container';
-import { useQuery } from 'react-query';
-import { userService } from '../../services/userService/userService';
 import { Link } from 'react-router-dom';
 import { useState, useRef } from 'react'
-import { ChangePasswordComponent } from './ChangePasswordComponent/ChangePasswordComponent';
-import { FavoritesComponent } from './FavoritesComponent/FavoritesComponent';
-import { MyAdvertisementComponent } from './MyAdvertisementComponent/MyAdvertisementComponent';
+import { ChangePasswordComponent } from './components/ChangePasswordComponent/ChangePasswordComponent';
+import { FavoritesComponent } from './components/FavoritesComponent/FavoritesComponent';
+import { MyAdvertisementComponent } from './components/MyAdvertisementComponent/MyAdvertisementComponent';
+import { MenuNavLink } from './components/MenuNavLink/MenuNavLink';
+import { useUser } from '../../hooks/useUser';
 
 const links = [
     {
@@ -20,66 +20,73 @@ const links = [
         value: 'changePassword',
     },
     {
-        name: 'избранное',
-        value: 'favorites',
-    },
-    {
         name: 'сменить аккаунт',
         value: 'changeAccount',
     },
 ]
 
-type Variant = 'myAdvertisements' | 'changePassword' | 'favorites' | 'changeAccount'
+type Variant = 'myAdvertisements' | 'changePassword' | 'changeAccount'
 
 export const PersonalAccount = () => {
-    const [content, setContent] = useState<string | Variant>('changePassword')
-
+    const [content, setContent] = useState<string | Variant>('myAdvertisements')
     const setNewContent = (variant: string | Variant) => setContent(variant)
-
-    const { data } = useQuery(
-        ['getUserInfo'],
-        () => userService.getUserInfo()
-    )
+    const { data } = useUser()
 
     return (
-        <Container>
-            <main className={styles.main}>
-
-                <aside>
-                    <div className={styles.userInfo}>
-                        {profileIcon}
-                        {data?.data.login}
-                    </div>
-
-                    <div className={styles.line} />
-
-                    <div className={styles.linksBlock}>
-
-                        {links.map(item =>
-                            item.name !== 'сменить аккаунт'
-                            &&
-                            <div
-                                key={item.name}
-                                className={styles.linksBlock__item}
-                                onClick={() => setNewContent(item.value)}
-                            >
-                                <p>{item.name}</p>
-                            </div>
-                        )}
-
-                    </div>
-                </aside>
-
-                <section className={styles.contentBlock}>
 
 
-                    {content === 'changePassword' && <ChangePasswordComponent />}
-                    {content === 'favorites' && <FavoritesComponent />}
-                    {content === 'myAdvertisemnts' && <MyAdvertisementComponent />}
+        <div className={styles.wrapper}>
 
-                </section>
+            <Container>
+                <main className={styles.main}>
 
-            </main>
-        </Container>
+                    <aside>
+                        <div className={styles.userInfo}>
+                            {profileIcon}
+                            {data?.data.login}
+                        </div>
+
+                        <div className={styles.line} />
+
+                        <nav className={styles.linksBlock}>
+                            <ul>
+
+                                {links.map(item =>
+                                    item.name !== 'сменить аккаунт'
+                                    &&
+                                    // <div
+                                    //     key={item.name}
+                                    //     className={styles.linksBlock__item}
+                                    //     onClick={() => setNewContent(item.value)}
+                                    // >
+                                    //     <p>{item.name}</p>
+                                    // </div>
+
+                                    <MenuNavLink
+                                        name={item.name}
+                                        value={item.value}
+                                        setNewContent={setContent}
+                                        key={item.value}
+                                    />
+                                )}
+                            </ul>
+
+                        </nav>
+                    </aside>
+
+                    <section className={styles.contentBlock}>
+
+                        {content === 'changePassword' && <ChangePasswordComponent />}
+                        {content === 'favorites' && <FavoritesComponent />}
+                        {content === 'myAdvertisements' && <MyAdvertisementComponent />}
+
+                    </section>
+
+                </main>
+            </Container>
+
+
+        </div>
+
     )
 }

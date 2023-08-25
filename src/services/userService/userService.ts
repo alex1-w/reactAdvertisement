@@ -18,6 +18,9 @@ export const userService = {
   },
   async changePassword(password: string) {
     return await http.put('/user/change-password', password);
+  },
+  async checkAuth() {
+    return await http.get('/user/ping')
   }
 };
 

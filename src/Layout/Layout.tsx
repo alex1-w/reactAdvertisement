@@ -16,7 +16,8 @@ export const Layout = () => {
             
             if (theme === 'dark') {
                 root.style.setProperty(
-                    '--primary-bg', 'rgb(27, 27, 27)'
+                    '--bg-dark', 'rgb(48, 48, 48)'
+                    // '--primary-bg',  'rgb(48, 48, 48)'
                 )
             }
             if (theme === 'light') { }

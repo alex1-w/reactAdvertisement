@@ -1,10 +1,11 @@
 //@ts-ignore
 import styles from './UserMenu.module.scss'
-import { personalAccountIcon, profileIcon } from '../../../data/categories.data'
+import { editIcon, listIcon, personalAccountIcon, profileIcon } from '../../../data/svgIcons'
 import { useState, useRef, useEffect, Fragment } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useUserContext } from '../../../providers/UserProvider'
 import { UserMenuItem } from './UserMenuItem/UserMenuItem'
+import { ThemeButton } from '../ThemeButton/ThemeButton'
 
 const links = [
     {
@@ -14,13 +15,8 @@ const links = [
     },
     {
         link: '/my-advertisements',
-        svg: profileIcon,
+        svg: listIcon,
         name: 'мои объявления'
-    },
-    {
-        link: '/frer',
-        svg: personalAccountIcon,
-        name: 'аууца'
     },
     {
         link: '/frerereb',
@@ -68,28 +64,39 @@ export const UserMenu = () => {
                                 {links.map(link => (
                                     link.name !== 'выйти'
                                         ?
-                                        <UserMenuItem link={link.link} name={link.name} key={link.name} svg={link.svg} />
+                                        <UserMenuItem
+                                            link={link.link}
+                                            name={link.name}
+                                            key={link.link}
+                                            svg={link.svg}
+                                        />
                                         :
-                                        <></>
+                                        <Fragment key={link.link} />
                                 ))}
                             </ul>
 
                             <div className={styles.menu__line}></div>
 
-                            <div onClick={exitFunc} className={styles.menu__exitBtn}>
-
-                                {links.map(link => (
-                                    link.name === 'выйти'
-                                        ?
-                                        <div key={link.link}>
-                                            <p className={styles.menu__exitBtn__name}>{link.name}</p>
-                                        </div>
-                                        :
-                                        <></>
-                                ))}
+                            <div className={styles.menu__footer}>
+                                <div onClick={exitFunc} className={styles.menu__exitBtn}>
+                                    {links.map(link => (
+                                        link.name === 'выйти'
+                                            ?
+                                            <p
+                                                className={styles.menu__name}
+                                                key={link.link}
+                                            >
+                                                {link.name}
+                                            </p>
+                                            :
+                                            <Fragment key={link.link} />
+                                    ))}
+                                </div>
+                                <div className={styles.menu__exitBtn__themeBtn}>
+                                    <ThemeButton dropdownMenuVariant />
+                                </div>
 
                             </div>
-
                         </div>
                     </motion.div>}
             </AnimatePresence>

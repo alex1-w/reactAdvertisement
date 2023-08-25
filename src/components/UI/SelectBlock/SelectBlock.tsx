@@ -8,36 +8,36 @@ import { ICategory } from "../../../types/ICategoryOption";
 
 interface ISelect {
     name: string
-    errors: any;
+    errors: string | undefined;
     rules: RegisterOptions;
-    // control: Control<ICreateAdForm>;
     control: Control<any>;
     options: ICategory[]
     title: string;
+    register?: any
 }
 
-export const SelectBlock: FC<ISelect> = ({ control, errors, name, rules, options, title }) => {
+export const SelectBlock: FC<ISelect> = ({ control, errors, name, rules, options, title, register }) => {
 
-    const getValue = (value: string) => {
-        return value ? options.find((option: ICategory) => option.name === value) : "";
+    const getValue = (value: any) => {
+        // console.log(value);
+        return value ? options.find((option: ICategory) => option.name === value) : 1;
     }
-    
+
     return (
         <div className={styles.categoryBlock}>
             <h3>{title}</h3>
 
             <Controller
+                {...register && register(name)}
                 name={name}
                 rules={rules}
                 control={control}
                 render={({ field: { name, value, onChange } }) => (
                     <div className={styles.categoryBlock__selectBlock}>
                         <ReactSelect
-                            // placeholder='категория'
                             options={options.map((item: ICategory) => {
                                 return ({
-                                    value: String(item.id),
-                                    // value: item.id,
+                                    value: item.id,
                                     label: item.name
                                 } as any)
                             })}
@@ -45,13 +45,13 @@ export const SelectBlock: FC<ISelect> = ({ control, errors, name, rules, options
                             onChange={(newValue) => onChange((newValue as any).value)}
                         />
                         <AnimatePresence>
-                            {errors[name] && (
+                            {errors && (
                                 <motion.p
                                     initial={{ height: 0, y: "-100" }}
                                     animate={{ height: "auto", y: 0 }}
                                     exit={{ height: 0, y: "-100" }}
                                 >
-                                    {errors[name].message}
+                                    {errors}
                                 </motion.p>
                             )}
                         </AnimatePresence>

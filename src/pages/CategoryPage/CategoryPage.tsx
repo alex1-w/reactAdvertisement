@@ -16,7 +16,7 @@ export const CategoryPage: FC = () => {
     const params = useParams()
 
     const { data: categoryData, isLoading: categoryLoading } = useQuery(
-        ['getCategory'],
+        ['getCategory', params?.id],
         () => categoryService.getCategory(String(params?.id)),
         {
             onSuccess: (data) => {
@@ -29,7 +29,7 @@ export const CategoryPage: FC = () => {
     )
 
     const { data: categoryAdvertisements, isLoading } = useQuery(
-        ['getCategoryAdvertisements'],
+        ['getCategoryAdvertisements', params?.id],
         () => advertisementService.getFilteredAdvertisements(String(params?.id))
     )
 

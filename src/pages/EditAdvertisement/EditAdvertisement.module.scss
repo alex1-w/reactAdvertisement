@@ -2,6 +2,7 @@
     background: var(--primary-bg);
     width: 100%;
     min-height: 100vh;
+    padding-top: 30px;
 }
 
 
@@ -60,7 +61,7 @@
     }
 }
 
-.adsBlock{
+.adsBlock {
     display: flex;
     flex-direction: column;
     gap: 20px;

@@ -40,6 +40,14 @@
     }
 }
 
+.categoryBlockBurgerMenu {
+    display: none;
+
+    @media screen and (max-width: 930px) {
+        display: block;
+    }
+}
+
 .categoryBlock {
     position: relative;
 
@@ -64,10 +72,19 @@
             }
         }
     }
+
 }
 
 @media screen and (max-width:930px) {
+
+    .categoryBlockBurgerMenu {
+        p {
+            color: white;
+        }
+    }
+
     .categoryBlock {
+        display: none;
 
         p {
             color: var(--light);

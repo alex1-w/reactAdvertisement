@@ -1,6 +1,6 @@
 //@ts-ignore
 import styles from './Navigation.module.scss';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import cn from 'classnames';
 import { useModalContext } from '../UI/ModalProvider/ModalProvider';
 import { FC, Fragment, useState } from 'react';
@@ -22,9 +22,7 @@ interface INavProps {
 
 export const Navigation: FC<INavProps> = ({ variant }) => {
     const { isAuth } = useUserContext()
-
     const [isCategoryBlockShowed, setIsCategoryBlockShowed] = useState<boolean>(false)
-    const showCategoryBlock = () => setIsCategoryBlockShowed(!isCategoryBlockShowed)
 
     const { isModalOpened } = useModalContext()
     const { closeMenu } = useMenuProvider()
@@ -65,11 +63,14 @@ export const Navigation: FC<INavProps> = ({ variant }) => {
                                     >
                                         {item.name}
                                     </NavLink>
-                                </li>}
-                        </>}
-                </Fragment>))}
-
+                                </li>
+                            }
+                        </>
+                    }
+                </Fragment>
+            ))}
             </ul>
+
             <div
                 className={styles.categoryBlock}
                 onMouseEnter={() => { setIsCategoryBlockShowed(true) }}
@@ -78,6 +79,11 @@ export const Navigation: FC<INavProps> = ({ variant }) => {
                 <p>Category</p>
                 {isCategoryBlockShowed && <CategoryBlock />}
             </div>
+
+            <div className={styles.categoryBlockBurgerMenu}>
+                <Link to={'/category-page/1'}>Category</Link>
+            </div>
+
         </nav>
     )
 }

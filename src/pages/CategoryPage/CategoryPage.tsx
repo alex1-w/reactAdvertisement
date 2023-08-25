@@ -10,6 +10,8 @@ import { advertisementService } from '../../services/advertisementService/advert
 import { Skeleton } from '../../components/UI/Skeleton/Skeleton'
 import { NotFoundComponent } from '../../components/NotFoundComponent/NotFoundComponent'
 import { AdvertisementItem } from '../../components/AdvertisementItem/AdvertisementItem'
+import { CategoryNav } from './CategoryNav/CategoryNav'
+import { useCategories } from '../../hooks/useCategories'
 
 export const CategoryPage: FC = () => {
     const navigate = useNavigate()
@@ -28,6 +30,8 @@ export const CategoryPage: FC = () => {
         }
     )
 
+    const { data: categories, isLoading: isCategoryLoading } = useCategories()
+
     const { data: categoryAdvertisements, isLoading } = useQuery(
         ['getCategoryAdvertisements', params?.id],
         () => advertisementService.getFilteredAdvertisements(String(params?.id))
@@ -37,6 +41,22 @@ export const CategoryPage: FC = () => {
 
         <>
             <div className={styles.wrapper}>
+
+                {/* {true */}
+                {isCategoryLoading
+                    ?
+                    <div>
+                        <Skeleton />
+                    </div>
+                    :
+                    <>
+                        {categories?.data
+                            &&
+                            <CategoryNav categories={categories?.data!} />
+                        }
+                    </>
+
+                }
 
                 <div className={styles.main}>
                     <div className={styles.top}>
@@ -53,13 +73,15 @@ export const CategoryPage: FC = () => {
                                             <div className={styles.top__imgBlock}>
                                                 <img src={categoryData?.data.image} alt={categoryData?.data.name} />
                                             </div>
-                                            
+
                                         </div>
                                         <div className={styles.top__description}>
                                             <p>{categoryData?.data.description}</p>
                                         </div>
-                                    </>}
-                            </>}
+                                    </>
+                                }
+                            </>
+                        }
                     </div>
                 </div>
 
@@ -80,8 +102,10 @@ export const CategoryPage: FC = () => {
                                         <AdvertisementItem advertisement={item} key={item.id} />
                                     ))}
                                 </div>
-                            </Container>}
-                    </>}
+                            </Container>
+                        }
+                    </>
+                }
             </div >
         </>
     )

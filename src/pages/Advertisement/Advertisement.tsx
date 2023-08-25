@@ -20,6 +20,15 @@ export const Advertisement = () => {
     const [numberButtonVariant, setNumberButtonVariant] = useState<any>('УЗНАТЬ НОМЕР')
     const { data, isLoading } = useAdvertisement(String(id))
 
+    let formatter = new Intl.NumberFormat("ru", {
+        style: "currency",
+        currency:"RUB",
+        minimumFractionDigits: 0
+    });
+
+    console.log(formatter.format(535445));
+
+
     const formattedDate = (date: string | undefined) => dayjs(date).format('D MMMM YYYY' + 'г.')
 
     console.log(data?.data.category);
@@ -56,7 +65,7 @@ export const Advertisement = () => {
                     <aside className={styles.rightPart}>
 
                         <div className={styles.rightPart__price}>
-                            <h4>433542&nbsp;руб.</h4>
+                            <h4>{formatter.format(433542)}</h4>
                         </div>
 
 

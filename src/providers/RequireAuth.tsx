@@ -17,7 +17,7 @@ export const RequireAuth = ({ children }: { children: React.ReactNode }) => {
     }, [isLoading, isAuth, navigate])
 
 
-    if (isLoading) { return <PreloaderPage /> }
+    // if (isLoading) { return <PreloaderPage /> }
 
 
     return (

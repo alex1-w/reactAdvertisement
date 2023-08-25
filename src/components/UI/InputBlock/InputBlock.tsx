@@ -23,7 +23,7 @@ export interface IInputBlock {
 export const InputBlock: FC<IInputBlock> = ({ errors, name, placeholder, register, rules, size, type, label, isMulti, className }) => {
 
   return (
-    <div className={cn(styles.main, className)}>
+    <div className={cn(styles.main)}>
       <TextField
         type={type}
         size={size}

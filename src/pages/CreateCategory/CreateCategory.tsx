@@ -39,7 +39,6 @@ export const CreateCategory = () => {
     }
 
     return (
-        // <Container>
         <div className={styles.wrapper}>
 
             <form onSubmit={handleSubmit(submit, error)} className={styles.formBlock}>
@@ -53,14 +52,12 @@ export const CreateCategory = () => {
                         name='name'
                         register={register}
                         rules={{
-                            required:
-                                { value: true, message: 'поле обязательно' },
-                            minLength:
-                                { value: 2, message: 'минимальное значение - 2' }
+                            required: { value: true, message: 'поле обязательно' },
+                            minLength: { value: 2, message: 'минимальное значение - 2' }
                         }}
                         size='small'
                         type='text'
-                        className={styles.inputBlock}
+                    // className={styles.inputBlock}
                     />
                 </div>
 
@@ -76,11 +73,9 @@ export const CreateCategory = () => {
                         }}
                         size='small'
                         type='text'
-                        className={styles.inputBlock}
                         isMulti={4}
                     />
                 </div>
-
 
                 <div className={styles.formBlock__item}>
                     <h3>Ссылка на картинку категории</h3>
@@ -92,7 +87,6 @@ export const CreateCategory = () => {
                             required: { value: true, message: 'поле обязательно' }
                         }}
                         size='small'
-                        className={styles.inputBlock}
                         type='text'
                     />
                 </div>
@@ -109,7 +103,5 @@ export const CreateCategory = () => {
             </form>
 
         </div>
-
-        // </Container >
     )
 }

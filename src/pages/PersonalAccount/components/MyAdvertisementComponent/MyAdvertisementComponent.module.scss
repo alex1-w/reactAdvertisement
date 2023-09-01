@@ -1,8 +1,21 @@
 .main {
+    padding: 10px;
     // border: 1px solid red;
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-.advertisementsBlock {}
+.advertisementsBlock {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+@media screen and (max-width: 1150px) {
+    
+    .advertisementsBlock {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}

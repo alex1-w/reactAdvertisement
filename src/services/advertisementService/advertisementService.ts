@@ -1,4 +1,3 @@
-// import { AnyNaptrRecord } from "dns";
 import { http } from "../../http/http";
 import { IAdvertisement, IAdvertisementResponse } from "./advertisementservice.interface";
 

@@ -12,15 +12,16 @@ export const MyAdvertisementItem: FC<IAdvertisementResponse> = ({ categoryId, de
     const deleteBlockRef = useRef<HTMLButtonElement>(null)
     const deleteBtnRef = useRef<HTMLDivElement>(null)
 
+    const hideDeleteBtn = () => deleteBlockRef?.current?.classList.remove(styles.active)
+    const showDeleteBtn = () => deleteBlockRef?.current?.classList.toggle(styles.active)
+
     const { mutateAsync } = useMutation(
         ['deleteAdvertisement'],
         (id: string) => advertisementService.deleteAdvertisement(String(id))
     )
 
-    const showDeleteBtn = () => deleteBlockRef?.current?.classList.toggle(styles.active)
-    const deleteAdvertisement = (id: string) => { mutateAsync(id) }
+    const deleteAdvertisement = (id: string) => mutateAsync(id)
 
-    const hideDeleteBtn = () => deleteBlockRef?.current?.classList.remove(styles.active)
     useOnClickOutside(deleteBtnRef, hideDeleteBtn)
 
     return (
@@ -49,15 +50,9 @@ export const MyAdvertisementItem: FC<IAdvertisementResponse> = ({ categoryId, de
                     {editIcon}
                 </Link>
 
-                <div
-                    ref={deleteBtnRef}
+                <div ref={deleteBtnRef} className={styles.deleteBlock}>
 
-                    className={styles.deleteBlock}>
-
-                    <div
-                        className={styles.deleteBlock__trash}
-                        onClick={showDeleteBtn}
-                    >
+                    <div className={styles.deleteBlock__trash} onClick={showDeleteBtn}>
                         {trashIcon}
                     </div>
 

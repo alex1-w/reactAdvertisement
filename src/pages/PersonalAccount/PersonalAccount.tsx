@@ -29,11 +29,9 @@ type Variant = 'myAdvertisements' | 'changePassword' | 'changeAccount'
 
 export const PersonalAccount = () => {
     const [content, setContent] = useState<string | Variant>('myAdvertisements')
-    const setNewContent = (variant: string | Variant) => setContent(variant)
     const { data } = useUser()
 
     return (
-
 
         <div className={styles.wrapper}>
 
@@ -54,14 +52,6 @@ export const PersonalAccount = () => {
                                 {links.map(item =>
                                     item.name !== 'сменить аккаунт'
                                     &&
-                                    // <div
-                                    //     key={item.name}
-                                    //     className={styles.linksBlock__item}
-                                    //     onClick={() => setNewContent(item.value)}
-                                    // >
-                                    //     <p>{item.name}</p>
-                                    // </div>
-
                                     <MenuNavLink
                                         name={item.name}
                                         value={item.value}
@@ -76,8 +66,8 @@ export const PersonalAccount = () => {
 
                     <section className={styles.contentBlock}>
 
+                        {/* {content === 'favorites' && <FavoritesComponent />} */}
                         {content === 'changePassword' && <ChangePasswordComponent />}
-                        {content === 'favorites' && <FavoritesComponent />}
                         {content === 'myAdvertisements' && <MyAdvertisementComponent />}
 
                     </section>

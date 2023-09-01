@@ -26,12 +26,7 @@ export const Advertisement = () => {
         minimumFractionDigits: 0
     });
 
-    console.log(formatter.format(535445));
-
-
     const formattedDate = (date: string | undefined) => dayjs(date).format('D MMMM YYYY' + 'г.')
-
-    console.log(data?.data.category);
 
     return (
         <div className={styles.wrapper}>

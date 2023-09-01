@@ -2,7 +2,6 @@ import { useQuery } from "react-query"
 import { advertisementService } from "../services/advertisementService/advertisementService"
 import { useNavigate } from "react-router-dom"
 
-
 export const useAdvertisement = (id: string) => {
     const navigate = useNavigate()
 

@@ -3,7 +3,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Ysabeau+SC:wght@1;100;200;30");
 @import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap");
 
-:root { 
+:root {
   --light: rgb(255, 255, 255);
   --primary-dark: rgb(0, 0, 0);
   --secondary-dark: rgb(202, 202, 202);
@@ -52,10 +52,14 @@ body {
 
 .layout.dark {
   background-color: var(--bg-dark);
-  
+
   h1,
   h2,
-  h3 {
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
     // background-color: var(--bg-dark);
     color: var(--primary-light);
     color: white;

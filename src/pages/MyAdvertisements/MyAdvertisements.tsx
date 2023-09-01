@@ -16,10 +16,10 @@ export const MyAdvertisements = () => {
         ['getUserAdvertisements'],
         () => userService.getUserAdvertisement(),
         {
-            onError: () => { navigate('/not-found') }
+            // onError: () => { navigate('/not-found') },
+            retry: false
         }
     )
-    // const advertisementsSeparate = (ad: IAdvertisementResponse) => { }
 
     console.log(data?.data);
 
@@ -55,7 +55,7 @@ export const MyAdvertisements = () => {
                                     ))}
                                 </div>
                                 :
-                                <p>объявлений пока нет</p>
+                                <h3>объявлений пока нет</h3>
                             }
                         </>}
                 </div>

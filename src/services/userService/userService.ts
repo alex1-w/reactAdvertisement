@@ -1,5 +1,5 @@
 import { http } from "../../http/http";
-import { IAdvertisement, IAdvertisementResponse } from "../advertisementService/advertisementservice.interface";
+import { IAdvertisementResponse } from "../advertisementService/advertisementservice.interface";
 import { IUserInfo, IUserService } from "./IUserService";
 
 export const userService = {

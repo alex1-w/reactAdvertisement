@@ -29,19 +29,15 @@ export const CreateCategory = () => {
     )
 
     const submit = (data: ICreateCategory) => {
-        console.log(data);
         mutateAsync(data)
         reset()
     }
 
-    const error = (errors: any) => {
-        console.log(errors);
-    }
 
     return (
         <div className={styles.wrapper}>
 
-            <form onSubmit={handleSubmit(submit, error)} className={styles.formBlock}>
+            <form onSubmit={handleSubmit(submit)} className={styles.formBlock}>
 
                 <h1>Cоздать категорию</h1>
 

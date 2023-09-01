@@ -81,7 +81,9 @@ export const Navigation: FC<INavProps> = ({ variant }) => {
             </div>
 
             <div className={styles.categoryBlockBurgerMenu}>
-                <Link to={'/category-page/1'}>Category</Link>
+                <Link to={'/category-page/1'}>
+                    <p>Category</p>
+                </Link>
             </div>
 
         </nav>

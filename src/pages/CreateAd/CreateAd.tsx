@@ -39,7 +39,6 @@ export const CreateAd = () => {
         enqueueSnackbar(`${error?.response?.data.message}`, { variant: "error" });
       },
       onSuccess: (data, body, context) => {
-        // console.log(data, body, context);
         enqueueSnackbar("объявление добавлено", { variant: "success" });
       },
     }
@@ -51,10 +50,8 @@ export const CreateAd = () => {
   )
 
   const onSubmit = async (createAdForm: IAdvertisement) => {
-    console.log(createAdForm);
     mutateAsync(createAdForm)
     reset()
-    // navigate('')
   };
 
   return (
